@@ -1,5 +1,7 @@
 
 
+
+
 namespace Keepr.Repositories;
 
 public class VaultsRepository
@@ -54,4 +56,39 @@ public class VaultsRepository
 
     return vault;
   }
+
+  internal Vault UpdateVault(Vault vaultData)
+  {
+    string sql = @"
+      UPDATE vaults
+      SET
+      name = @Name,
+      description = @Description,
+      img = @Img,
+      isPrivate = @IsPrivate
+      WHERE id = @Id LIMIT 1;
+
+      SELECT
+      vaults.*,
+      accounts.*
+      FROM vaults
+      JOIN accounts ON accounts.id = vaults.creatorId
+      WHERE vaults.id = @Id;";
+
+    Vault vault = _db.Query<Vault, Profile, Vault>(sql, (vault, profile) =>
+    {
+      vault.Creator = profile;
+      return vault;
+    }, vaultData).FirstOrDefault();
+
+    return vault;
+  }
+
+  internal void RemoveVault(int vaultId)
+  {
+    string sql = "DELETE FROM vaults WHERE id = @vaultId LIMIT 1;";
+    _db.Execute(sql, new { vaultId });
+  }
+
+
 }

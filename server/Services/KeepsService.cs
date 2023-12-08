@@ -46,7 +46,7 @@ public class KeepsService
     Keep keepToUpdate = GetKeepById(keepId);
     if (keepToUpdate.CreatorId != userId)
     {
-      throw new Exception("Not your Keep to update!");
+      throw new Exception("Not your Keep to edit!");
     }
 
     keepToUpdate.Name = keepData.Name ?? keepToUpdate.Name;
