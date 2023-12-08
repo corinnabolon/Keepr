@@ -2,6 +2,7 @@
 
 
 
+
 namespace Keepr.Repositories;
 
 public class KeepsRepository
@@ -100,5 +101,14 @@ public class KeepsRepository
 
     return keep;
   }
+
+
+  internal void RemoveKeep(int keepId)
+  {
+    string sql = "DELETE FROM keeps WHERE id = @keepId LIMIT 1;";
+    _db.Execute(sql, new { keepId });
+  }
+
+
 
 }
