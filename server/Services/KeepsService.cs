@@ -22,7 +22,7 @@ public class KeepsService
   }
 
 
-  private Keep GetKeepById(int keepId)
+  internal Keep GetKeepById(int keepId)
   {
     Keep keep = _repository.GetKeepById(keepId);
 
@@ -68,4 +68,5 @@ public class KeepsService
 
     return $"{keep.Name} has been deleted!";
   }
+
 }

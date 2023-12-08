@@ -2,6 +2,7 @@
 
 
 
+
 namespace Keepr.Repositories;
 
 public class VaultsRepository
@@ -89,6 +90,5 @@ public class VaultsRepository
     string sql = "DELETE FROM vaults WHERE id = @vaultId LIMIT 1;";
     _db.Execute(sql, new { vaultId });
   }
-
 
 }
