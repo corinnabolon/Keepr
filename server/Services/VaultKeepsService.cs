@@ -13,11 +13,11 @@ public class VaultKeepsService
     _keepsService = keepsService;
   }
 
-  internal FlattenedVaultKeep CreateVaultKeep(VaultKeep vaultKeepData)
+  internal VaultKeep CreateVaultKeep(VaultKeep vaultKeepData)
   {
-    FlattenedVaultKeep flattenedVaultKeep = _repository.CreateVaultKeep(vaultKeepData);
-    Keep keep = _keepsService.GetKeepById(flattenedVaultKeep.Id);
+    VaultKeep vaultKeep = _repository.CreateVaultKeep(vaultKeepData);
+    Keep keep = _keepsService.GetKeepById(vaultKeep.KeepId);
     keep.Kept++;
-    return flattenedVaultKeep;
+    return vaultKeep;
   }
 }

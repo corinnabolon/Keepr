@@ -1,6 +1,6 @@
 namespace Keepr.Models;
 
-public class FlattenedVaultKeep : Keep
+public class KeepInVault : Keep
 {
   public int VaultKeepId { get; set; }
 

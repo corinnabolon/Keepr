@@ -1,3 +1,4 @@
+
 namespace Keepr.Repositories;
 
 public class KeepsRepository
@@ -104,6 +105,26 @@ public class KeepsRepository
     _db.Execute(sql, new { keepId });
   }
 
+  internal List<KeepInVault> GetKeepsByVaultId(int vaultId)
+  {
+    string sql = @"SELECT
+      vaultkeeps.*,
+      keeps.*,
+      accounts.*
+      FROM vaultkeeps
+      JOIN keeps ON keeps.id = vaultkeeps.keepId
+      JOIN accounts ON accounts.id = vaultkeeps.creatorId
+      WHERE vaultkeeps.vaultId = @vaultId;";
 
 
+    List<KeepInVault> keepsInVault = _db.Query<VaultKeep, KeepInVault, Profile, KeepInVault>(sql, (vaultkeep, keepinvault, profile) =>
+    {
+      keepinvault.VaultKeepId = vaultkeep.Id;
+      keepinvault.VaultId = vaultkeep.VaultId;
+      keepinvault.Creator = profile;
+      return keepinvault;
+
+    }, new { vaultId }).ToList();
+    return keepsInVault;
+  }
 }

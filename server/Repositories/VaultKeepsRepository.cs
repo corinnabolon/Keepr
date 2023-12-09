@@ -11,27 +11,47 @@ public class VaultKeepsRepository
   }
 
 
-  internal FlattenedVaultKeep CreateVaultKeep(VaultKeep vaultKeepData)
+  internal VaultKeep CreateVaultKeep(VaultKeep vaultKeepData)
   {
     string sql = @"
             INSERT INTO vaultkeeps
-            (vaultKeepId, vaultId)
+            (creatorId, keepId, vaultId)
             VALUES
-            (@VaultKeepId, @VaultId);
+            (@CreatorId, @KeepId, @VaultId);
 
-            SELECT
-            *
-            FROM vaultkeeps
+            SELECT * FROM vaultkeeps
             WHERE vaultkeeps.id = LAST_INSERT_ID()
             ;";
 
-    FlattenedVaultKeep flattenedVaultKeep = _db.Query<VaultKeep, FlattenedVaultKeep, FlattenedVaultKeep>(sql, (vaultKeep, flattenedVaultKeep) =>
-    {
-      flattenedVaultKeep.VaultKeepId = vaultKeep.Id;
-      flattenedVaultKeep.VaultId = vaultKeep.VaultId;
-      return flattenedVaultKeep;
-    }, vaultKeepData).FirstOrDefault();
+    VaultKeep vaultKeep = _db.Query<VaultKeep>(sql, vaultKeepData).FirstOrDefault();
 
-    return flattenedVaultKeep;
+    return vaultKeep;
   }
+
+
+  // internal KeepInVault CreateVaultKeep(VaultKeep vaultKeepData)
+  // {
+  //   string sql = @"
+  //           INSERT INTO vaultkeeps
+  //           (creatorId, keepId, vaultId)
+  //           VALUES
+  //           (@CreatorId, @KeepId, @VaultId);
+
+  //           SELECT
+  //           vaultkeeps.*,
+  //           keeps.*
+  //           FROM vaultkeeps
+  //           JOIN keeps ON keeps.id = vaultkeeps.keepId
+  //           WHERE vaultkeeps.id = LAST_INSERT_ID()
+  //           ;";
+
+  //   KeepInVault keepInVault = _db.Query<VaultKeep, KeepInVault, KeepInVault>(sql, (vaultKeep, keepInVault) =>
+  //   {
+  //     keepInVault.VaultKeepId = vaultKeep.Id;
+  //     keepInVault.VaultId = vaultKeep.VaultId;
+  //     return keepInVault;
+  //   }, vaultKeepData).FirstOrDefault();
+
+  //   return keepInVault;
+  // }
 }

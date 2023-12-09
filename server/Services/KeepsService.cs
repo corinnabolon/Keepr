@@ -4,9 +4,12 @@ public class KeepsService
 {
   private readonly KeepsRepository _repository;
 
-  public KeepsService(KeepsRepository repository)
+  private readonly VaultsService _vaultsService;
+
+  public KeepsService(KeepsRepository repository, VaultsService vaultsService)
   {
     _repository = repository;
+    _vaultsService = vaultsService;
   }
 
   internal Keep CreateKeep(Keep keepData)
@@ -69,4 +72,10 @@ public class KeepsService
     return $"{keep.Name} has been deleted!";
   }
 
+  internal List<KeepInVault> GetKeepsByVaultId(int vaultId, string userId)
+  {
+    Vault vault = _vaultsService.GetVaultById(vaultId, userId);
+    List<KeepInVault> keepsInVault = _repository.GetKeepsByVaultId(vaultId);
+    return keepsInVault;
+  }
 }
