@@ -78,4 +78,11 @@ public class KeepsService
     List<KeepInVault> keepsInVault = _repository.GetKeepsByVaultId(vaultId);
     return keepsInVault;
   }
+
+  internal Keep UpdateKeptCount(Keep keepData)
+  {
+    Keep keep = _repository.UpdateKeep(keepData);
+    return keep;
+  }
+
 }

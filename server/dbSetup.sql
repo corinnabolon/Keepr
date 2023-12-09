@@ -7,7 +7,8 @@ CREATE TABLE
         updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
         name varchar(255) COMMENT 'User Name',
         email varchar(255) COMMENT 'User Email',
-        picture varchar(255) COMMENT 'User Picture'
+        picture varchar(255) COMMENT 'User Picture',
+        coverImg varchar(1000) DEFAULT "https://images.unsplash.com/photo-1458682625221-3a45f8a844c7?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     ) default charset utf8 COMMENT '';
 
 CREATE TABLE
@@ -50,8 +51,6 @@ CREATE TABLE
         FOREIGN KEY (vaultId) REFERENCES vaults(id) ON DELETE CASCADE,
         UNIQUE (keepId, vaultId)
     ) default charset utf8 COMMENT '';
-
-)
 
 DROP TABLE keeps;
 

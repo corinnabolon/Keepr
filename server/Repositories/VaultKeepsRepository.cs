@@ -1,3 +1,4 @@
+
 namespace Keepr.Repositories;
 
 public class VaultKeepsRepository
@@ -26,6 +27,21 @@ public class VaultKeepsRepository
     VaultKeep vaultKeep = _db.Query<VaultKeep>(sql, vaultKeepData).FirstOrDefault();
 
     return vaultKeep;
+  }
+
+  internal VaultKeep GetVaultKeepById(int vaultKeepId)
+  {
+    string sql = "SELECT * FROM vaultkeeps WHERE id = @vaultKeepId;";
+
+    VaultKeep vaultKeep = _db.Query<VaultKeep>(sql, new { vaultKeepId }).FirstOrDefault();
+
+    return vaultKeep;
+  }
+
+  internal void RemoveVaultKeep(int vaultKeepId)
+  {
+    string sql = "DELETE FROM vaultkeeps WHERE id = @vaultKeepId LIMIT 1;";
+    _db.Execute(sql, new { vaultKeepId });
   }
 
 
