@@ -1,5 +1,7 @@
 
 
+
+
 namespace Keepr.Services;
 
 public class VaultsService
@@ -29,7 +31,6 @@ public class VaultsService
     {
       throw new Exception("Something went wrong...");
     }
-
     return vault;
   }
 
@@ -64,6 +65,21 @@ public class VaultsService
     return $"{vault.Name} has been deleted!";
   }
 
+  internal List<Vault> GetUserVaults(string profileId, string userId)
+  {
+    List<Vault> vaults = _repository.GetUserVaults(profileId);
+    List<Vault> filteredVaults = vaults.FindAll((vault) => vault.IsPrivate == false);
+    if (profileId != userId)
+    {
+      return filteredVaults;
+    }
+    return vaults;
+    //TODO: Check on this--unreachable code?
+  }
 
-
+  internal List<Vault> GetMyVaults(string userId)
+  {
+    List<Vault> vaults = _repository.GetMyVaults(userId);
+    return vaults;
+  }
 }
