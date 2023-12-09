@@ -1,10 +1,10 @@
 <template>
   <div @click="setActiveKeep(keepProp.id)" class="text-center">
     <div class="keep-coverImg rounded box-shadow my-3 mx-1 d-flex flex-column justify-content-end" @click="openModal"
-      role="button" title="See Keep details">
+      role="button" :title='`See details of this keep, "${keepProp.name}"`'>
       <div class="d-flex align-items-center my-2"
         :class="[route.name == 'Home' ? 'justify-content-around' : 'justify-content-start ms-2']">
-        <p class="mb-0">{{ keepProp.name }}</p>
+        <p class="mb-0 text-light fw-bold">{{ keepProp.name }}</p>
         <img v-if="route.name == 'Home'" @click.stop="goProfilePage(keepProp.creatorId)" :src="keepProp.creator.picture"
           class="user-image rounded-circle">
       </div>

@@ -11,12 +11,17 @@
     <section class="row justify-content-center">
       <div class="col-7 text-center large-margin-top">
         <p class="fs-2">{{ activeProfile.name }}</p>
+        <p>{{ profileVaults.length }} Vaults | {{ profileKeeps.length }} Keeps</p>
       </div>
     </section>
     <section class="row">
-      <!-- //Vaults go here -->
+      <p class="fs-2 fw-bold mb-0 ms-1">Vaults</p>
+      <div v-for="vault in profileVaults" :key="vault.id" class="col-3">
+        <VaultSmallComponent :vaultProp="vault" />
+      </div>
     </section>
     <section class="row">
+      <p class="fs-2 fw-bold mt-5 mb-0 ms-1">Keeps</p>
       <div v-for="keep in profileKeeps" :key="keep.id" class="col-3">
         <KeepSmallComponent :keepProp="keep" />
       </div>
@@ -32,6 +37,7 @@ import { computed, reactive, onMounted } from 'vue';
 import Pop from "../utils/Pop.js";
 import { profilesService } from "../services/ProfilesService.js";
 import KeepSmallComponent from "../components/KeepSmallComponent.vue"
+import VaultSmallComponent from "../components/VaultSmallComponent.vue"
 import { logger } from "../utils/Logger.js";
 
 export default {
@@ -60,7 +66,7 @@ export default {
 
     }
   },
-  components: { KeepSmallComponent }
+  components: { KeepSmallComponent, VaultSmallComponent }
 };
 </script>
 
