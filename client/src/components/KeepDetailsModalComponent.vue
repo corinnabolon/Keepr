@@ -23,13 +23,14 @@
                 <p class="fs-5">{{ activeKeep.description }}</p>
               </div>
               <div class="d-flex mb-2">
-                <form class="d-flex me-5">
-                  <select class="form-select" aria-label="Select Vault" required>
-                    <option v-for="vault in userVaults" :key="vault.id" :value="vault">{{ vault }}</option>
+                <form @submit.prevent="addToVault" class="d-flex">
+                  <select v-model="editableVault" class="form-select" aria-label="Select Vault" required>
+                    <option v-for="vault in myVaults" :key="vault.id" :value="vault">{{ vault.name }}
+                    </option>
                   </select>
-                  <button class="btn btn-success">Save</button>
+                  <button type="submit" class="btn btn-success">Save</button>
                 </form>
-                <div class="d-flex ms-5 align-items-center">
+                <div class="d-flex align-items-center">
                   <img :src="activeKeep.creator.picture" alt="Keep Creator Picture" :title="`{activeKeep.creator.name}`"
                     class="user-image rounded-circle">
                   <p class="mb-0">{{ activeKeep.creator.name }}</p>
@@ -46,16 +47,30 @@
 
 <script>
 import { AppState } from '../AppState';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
+import Pop from "../utils/Pop.js";
+import { vaultKeepsService } from "../services/VaultKeepsService.js";
 
 
 export default {
 
   setup() {
+    let editableVault = ref({});
 
     return {
+      editableVault,
       activeKeep: computed(() => AppState.activeKeep),
-      userVaults: computed(() => AppState.userVaults),
+      myVaults: computed(() => AppState.myVaults),
+
+      async addToVault() {
+        try {
+          const vault = editableVault.value
+          const vaultId = vault.id
+          await vaultKeepsService.addToVault(vaultId);
+        } catch (error) {
+          Pop.error(error);
+        }
+      },
 
     }
   }

@@ -9,15 +9,16 @@
 </template>
 
 <script>
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, watch } from 'vue';
 import { AppState } from '../AppState';
 import Pop from '../utils/Pop';
 import { keepsService } from "../services/KeepsService.js";
 import KeepSmallComponent from "../components/KeepSmallComponent.vue"
+import { accountService } from "../services/AccountService.js";
 
 export default {
   setup() {
-    const account = computed(() => AppState.accounts);
+    const account = computed(() => AppState.account);
     const keeps = computed(() => AppState.keeps);
 
 
@@ -25,9 +26,21 @@ export default {
       getKeeps();
     })
 
+    watch(account, () => {
+      getMyVaults();
+    })
+
     async function getKeeps() {
       try {
         await keepsService.getKeeps();
+      } catch (error) {
+        Pop.error(error);
+      }
+    }
+
+    async function getMyVaults() {
+      try {
+        await accountService.getMyVaults();
       } catch (error) {
         Pop.error(error);
       }
