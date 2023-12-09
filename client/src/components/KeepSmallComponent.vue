@@ -2,9 +2,11 @@
   <div @click="setActiveKeep(keepProp.id)" class="text-center">
     <div class="keep-coverImg rounded box-shadow my-3 mx-1 d-flex flex-column justify-content-end" @click="openModal"
       role="button" title="See Keep details">
-      <div class="d-flex align-items-center justify-content-around my-2">
+      <div class="d-flex align-items-center my-2"
+        :class="[route.name == 'Home' ? 'justify-content-around' : 'justify-content-start ms-2']">
         <p class="mb-0">{{ keepProp.name }}</p>
-        <img :src="keepProp.creator.picture" class="user-image rounded-circle">
+        <img v-if="route.name == 'Home'" @click.stop="goProfilePage(keepProp.creatorId)" :src="keepProp.creator.picture"
+          class="user-image rounded-circle">
       </div>
     </div>
   </div>
@@ -19,12 +21,18 @@ import Pop from '../utils/Pop';
 import { keepsService } from "../services/KeepsService.js";
 import { logger } from "../utils/Logger.js";
 import { Modal } from "bootstrap";
+import { useRouter, useRoute } from "vue-router";
 
 export default {
   props: { keepProp: { type: Keep, required: true } },
 
   setup(props) {
+    const router = useRouter();
+    const route = useRoute();
+
     return {
+      router,
+      route,
       keepCoverImg: computed(() => `url(${props.keepProp?.img})`),
 
       async setActiveKeep(keepId) {
@@ -33,6 +41,10 @@ export default {
         } catch (error) {
           Pop.error(error)
         }
+      },
+
+      goProfilePage(profileId) {
+        router.push({ name: 'Profile', params: { profileId: profileId } });
       },
 
       openModal() {
@@ -47,13 +59,13 @@ export default {
 
 <style lang="scss" scoped>
 .keep-coverImg {
-  position: relative;
+  // position: relative;
   background-image: v-bind(keepCoverImg);
   background-size: cover;
   background-position: center;
   height: 30dvh;
   aspect-ratio: 1/1;
-  object-fit: cover;
+  // object-fit: cover;
 }
 
 .user-image {
