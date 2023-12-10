@@ -31,6 +31,7 @@ class VaultsService {
     AppState.activeVault = null;
     AppState.activeVaultArray.length = 0;
     AppState.vaultKeeps.length = 0;
+    AppState.myVaults.length = 0;
   }
 
 

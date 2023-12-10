@@ -48,6 +48,7 @@ export default {
           } else {
             await keepsService.setActiveKeep(keepId);
           }
+          logger.log("ActiveKeep", AppState.activekeep)
         } catch (error) {
           Pop.error(error)
         }

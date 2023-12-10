@@ -11,12 +11,12 @@
     <section class="row justify-content-center">
       <div class="col-7 text-center large-margin-top">
         <p class="fs-2">{{ activeProfile.name }}</p>
-        <p>{{ profileVaults.length }} Vaults | {{ profileKeeps.length }} Keeps</p>
+        <p>{{ vaultsToShow.length }} Vaults | {{ profileKeeps.length }} Keeps</p>
       </div>
     </section>
     <section class="row">
       <p class="fs-2 fw-bold mb-0 ms-1">Vaults</p>
-      <div v-for="vault in profileVaults" :key="vault.id" class="col-3">
+      <div v-for="vault in vaultsToShow" :key="vault.id" class="col-3">
         <VaultSmallComponent :vaultProp="vault" />
       </div>
     </section>
@@ -34,7 +34,7 @@
 <script>
 import { useRoute } from "vue-router";
 import { AppState } from '../AppState';
-import { computed, reactive, onMounted } from 'vue';
+import { computed, reactive, onMounted, watch } from 'vue';
 import Pop from "../utils/Pop.js";
 import { profilesService } from "../services/ProfilesService.js";
 import KeepSmallComponent from "../components/KeepSmallComponent.vue"
@@ -42,15 +42,23 @@ import VaultSmallComponent from "../components/VaultSmallComponent.vue"
 import KeepDetailsModalComponent from "../components/KeepDetailsModalComponent.vue"
 import { logger } from "../utils/Logger.js";
 import { keepsService } from "../services/KeepsService.js";
+import { accountService } from "../services/AccountService.js";
+import { vaultsService } from "../services/VaultsService.js";
 
 export default {
   setup() {
     const route = useRoute();
+    const account = computed(() => AppState.account);
 
     onMounted(() => {
       keepsService.clearKeepData();
       profilesService.clearData();
+      vaultsService.clearVaultData();
       setActiveProfile();
+    })
+
+    watch(account, () => {
+      getMyVaults();
     })
 
     async function setActiveProfile() {
@@ -62,10 +70,25 @@ export default {
       }
     }
 
+    async function getMyVaults() {
+      try {
+        await accountService.getMyVaults();
+      } catch (error) {
+        Pop.error(error);
+      }
+    }
+
     return {
+      account,
       activeProfile: computed(() => AppState.activeProfile),
       profileKeeps: computed(() => AppState.profileKeeps),
-      profileVaults: computed(() => AppState.profileVaults),
+      vaultsToShow: computed(() => {
+        if (AppState.activeProfile.id == AppState.account.id) {
+          return AppState.myVaults
+        } else {
+          return AppState.profileVaults
+        }
+      })
 
 
     }

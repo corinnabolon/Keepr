@@ -4,6 +4,7 @@ import { logger } from "../utils/Logger.js"
 import { api } from "./AxiosService.js"
 import { Keep } from "../models/Keep.js"
 import { Vault } from "../models/Vault.js"
+import { accountService } from "./AccountService.js"
 
 class ProfilesService {
 
@@ -12,7 +13,11 @@ class ProfilesService {
     AppState.activeProfile = new Profile(res.data)
     logger.log("active profile", AppState.activeProfile)
     await this.getActiveProfileKeeps(profileId)
-    await this.getActiveProfileVaults(profileId)
+    if (AppState.account.id == profileId) {
+      await accountService.getMyVaults()
+    } else {
+      await this.getActiveProfileVaults(profileId)
+    }
   }
 
   clearData() {

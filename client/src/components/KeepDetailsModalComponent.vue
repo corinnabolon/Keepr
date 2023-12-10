@@ -38,9 +38,6 @@
               </div>
             </div>
           </section>
-          <section v-else>
-            NO active keep!
-          </section>
         </div>
       </div>
     </div>
@@ -53,6 +50,7 @@ import { AppState } from '../AppState';
 import { computed, ref } from 'vue';
 import Pop from "../utils/Pop.js";
 import { vaultKeepsService } from "../services/VaultKeepsService.js";
+import { Modal } from "bootstrap";
 
 
 export default {
@@ -70,6 +68,8 @@ export default {
           const vault = editableVault.value
           const vaultId = vault.id
           await vaultKeepsService.addToVault(vaultId);
+          Pop.success(`${AppState.activeKeep.name} added to ${vault.name}`)
+          // Modal.getOrCreateInstance("#keepDetailsModal").hide()
         } catch (error) {
           Pop.error(error);
         }
