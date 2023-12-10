@@ -89,11 +89,11 @@ export default {
       profilesService.clearData();
       vaultsService.clearVaultData();
       getMyVaults();
-      setActiveProfile();
     })
 
     watch(account, () => {
       editableAccount.value = AppState.account;
+      setActiveProfile();
     })
 
     async function setActiveProfile() {
