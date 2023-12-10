@@ -17,8 +17,8 @@
                 required maxLength="1000">
             </div>
             <div class="mb-4 mx-4">
-              <textarea v-model="editableKeep.description" type="text" class="form-control" id="description"
-                placeholder="Keep description..."></textarea>
+              <textarea v-model="editableKeep.description" required type="text" class="form-control" id="description"
+                placeholder="Keep description..." maxLength="1000" minLength="3"></textarea>
             </div>
             <div class="text-end mt-3">
               <button type="submit" class="btn btn-success me-3 mb-3">Create</button>
@@ -42,6 +42,13 @@ export default {
   setup() {
     let editableKeep = ref({})
 
+    onMounted(() => {
+      const createKeepModalElem = document.getElementById('createKeepModal')
+      createKeepModalElem.addEventListener('hidden.bs.modal', function (event) {
+        editableKeep.value = {}
+      })
+    })
+
     return {
       editableKeep,
 
@@ -50,7 +57,7 @@ export default {
           const keepData = editableKeep.value
           await keepsService.createKeep(keepData)
           Pop.success("Keep created!")
-          editableKeep = ({})
+          editableKeep.value = {}
           Modal.getOrCreateInstance("#createKeepModal").hide()
         } catch (error) {
           Pop.error(error)
