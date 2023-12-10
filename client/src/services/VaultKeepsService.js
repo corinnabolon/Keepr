@@ -12,7 +12,7 @@ class VaultKeepsService {
     vaultKeepData.vaultId = vaultId
     vaultKeepData.keepId = vaultKeepData.id
     logger.log("vaultKeepData after adding vaultId and keepId", vaultKeepData)
-    //TODO: check all account's current vaultkeeps to make sure not duplicating--back end won't allow it--or get rid of "unique" on the back end
+    //TODO: check all account's current vaultkeeps to make sure not duplicating--back end won't allow it--or get rid of "unique" on the back end OR figure out how to throw better error message
     const res = await api.post("api/vaultkeeps", vaultKeepData)
     logger.log("After posted", res.data)
     vaultKeepData.vaultKeepId = res.data.id

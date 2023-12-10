@@ -19,6 +19,12 @@ class AccountService {
     AppState.myVaults = res.data.map((pojo) => new Vault(pojo))
     logger.log("My Vaults", AppState.myVaults)
   }
+
+  async editAccount(accountData) {
+    const res = await api.put("account", accountData)
+    logger.log(res.data)
+    AppState.account = new Account(res.data)
+  }
 }
 
 export const accountService = new AccountService()

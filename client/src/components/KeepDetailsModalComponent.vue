@@ -69,7 +69,6 @@ export default {
           const vaultId = vault.id
           await vaultKeepsService.addToVault(vaultId);
           Pop.success(`${AppState.activeKeep.name} added to ${vault.name}`)
-          // Modal.getOrCreateInstance("#keepDetailsModal").hide()
         } catch (error) {
           Pop.error(error);
         }

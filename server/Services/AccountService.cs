@@ -24,11 +24,16 @@ public class AccountService
     return profile;
   }
 
-  internal Account Edit(Account editData, string userEmail)
+  internal Account Edit(Account editData, string userEmail, string userId)
   {
     Account original = GetProfileByEmail(userEmail);
+    if (original.Id != userId)
+    {
+      throw new Exception("Not your account to edit.");
+    }
     original.Name = editData.Name?.Length > 0 ? editData.Name : original.Name;
     original.Picture = editData.Picture?.Length > 0 ? editData.Picture : original.Picture;
+    original.CoverImg = editData.CoverImg?.Length > 0 ? editData.CoverImg : original.CoverImg;
     return _repo.Edit(original);
   }
 }
