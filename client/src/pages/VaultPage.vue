@@ -29,14 +29,18 @@ import Pop from "../utils/Pop.js";
 import { vaultsService } from "../services/VaultsService.js";
 import VaultCoverComponent from "../components/VaultCoverComponent.vue"
 import KeepSmallComponent from "../components/KeepSmallComponent.vue"
+import { keepsService } from "../services/KeepsService.js";
+import { logger } from "../utils/Logger.js";
 
 export default {
   setup() {
     const route = useRoute();
     const router = useRouter();
     const watchableVaultId = computed(() => route.params.vaultId);
+    const vaultKeeps = computed(() => AppState.vaultKeeps);
 
     watch(watchableVaultId, () => {
+      keepsService.clearKeepData();
       vaultsService.clearVaultData();
       getVaultById();
     }, { immediate: true })
@@ -45,21 +49,24 @@ export default {
       try {
         const vaultId = route.params.vaultId;
         await vaultsService.getVaultById(vaultId);
+        await vaultsService.getKeepsInVault(vaultId);
       } catch (error) {
         Pop.error(error)
       }
     }
 
+
     return {
+      vaultKeeps,
+      activeKeep: computed(() => AppState.activeKeep),
       activeVault: computed(() => AppState.activeVault),
       activeVaultArray: computed(() => AppState.activeVaultArray),
-      vaultKeeps: computed(() => AppState.vaultKeeps),
       keepPluralOrSingular: computed(() => {
         if (AppState.vaultKeeps.length == 1) {
           return "Keep"
         }
         return "Keeps"
-      })
+      }),
 
     }
   },

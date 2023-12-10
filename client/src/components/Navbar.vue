@@ -1,5 +1,30 @@
 <template>
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark px-3">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Home</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown"
+        aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Create
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+              <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#createKeepModal">New Keep</a>
+              </li>
+              <li><a class="dropdown-item" href="#">New Vault</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <Login />
+    </div>
+  </nav>
+  <!-- <nav class="navbar navbar-expand-sm navbar-dark bg-dark px-3">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
         <img alt="logo" src="../assets/img/cw-logo.png" height="45" />
@@ -17,22 +42,23 @@
           </router-link>
         </li>
       </ul>
-      <!-- LOGIN COMPONENT HERE -->
-      <div>
-        <button class="btn text-light" @click="toggleTheme"><i class="mdi" :class="theme == 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"></i></button>
-      </div>
-      <Login />
-    </div>
-  </nav>
+  <div>
+    <button class="btn text-light" @click="toggleTheme"><i class="mdi"
+        :class="theme == 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"></i></button>
+  </div>
+  <Login />
+  </div>
+  </nav> -->
 </template>
 
 <script>
 import { onMounted, ref } from 'vue';
 import { loadState, saveState } from '../utils/Store.js';
+import CreateKeepModal from "./CreateKeepModal.vue";
+
 import Login from './Login.vue';
 export default {
   setup() {
-
     const theme = ref(loadState('theme') || 'light')
 
     onMounted(() => {
@@ -48,7 +74,7 @@ export default {
       }
     }
   },
-  components: { Login }
+  components: { Login, CreateKeepModal }
 }
 </script>
 

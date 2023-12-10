@@ -1,5 +1,5 @@
 <template>
-  <div class="modal fade" id="keepDetailsModal" tabindex="-1" aria-labelledby="keepDetailsModal Label" aria-hidden="true">
+  <div class="modal fade" id="keepDetailsModal" tabindex="-1" aria-labelledby="keepDetailsModal Label">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <!-- <div class="modal-header mb-0 pb-0 d-flex align-items-center">
@@ -11,7 +11,7 @@
         <div class="container">
           <section v-if="activeKeep" class="row">
             <div class="col-6 mx-0 px-0">
-              <img :src="activeKeep.img" alt="Keep picture" :title="activeKeep.name" class="container m-0 p-0 rounded">
+              <img :src="activeKeep.img" alt="Keep picture" :title="activeKeep.name" class="keep-image m-0 p-0 rounded">
             </div>
             <div class="col-6 d-flex flex-column align-items-center justify-content-between">
               <div class="d-flex mt-2">
@@ -37,6 +37,9 @@
                 </div>
               </div>
             </div>
+          </section>
+          <section v-else>
+            NO active keep!
           </section>
         </div>
       </div>
@@ -79,6 +82,13 @@ export default {
 
 
 <style lang="scss" scoped>
+.keep-image {
+  height: 100dvh;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
 .user-image {
   height: 8dvh;
   aspect-ratio: 1/1;

@@ -27,6 +27,7 @@
       </div>
     </section>
   </div>
+  <KeepDetailsModalComponent />
 </template>
 
 
@@ -38,13 +39,16 @@ import Pop from "../utils/Pop.js";
 import { profilesService } from "../services/ProfilesService.js";
 import KeepSmallComponent from "../components/KeepSmallComponent.vue"
 import VaultSmallComponent from "../components/VaultSmallComponent.vue"
+import KeepDetailsModalComponent from "../components/KeepDetailsModalComponent.vue"
 import { logger } from "../utils/Logger.js";
+import { keepsService } from "../services/KeepsService.js";
 
 export default {
   setup() {
     const route = useRoute();
 
     onMounted(() => {
+      keepsService.clearKeepData();
       profilesService.clearData();
       setActiveProfile();
     })
@@ -66,7 +70,7 @@ export default {
 
     }
   },
-  components: { KeepSmallComponent, VaultSmallComponent }
+  components: { KeepSmallComponent, VaultSmallComponent, KeepDetailsModalComponent }
 };
 </script>
 

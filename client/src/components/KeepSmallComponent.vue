@@ -10,6 +10,7 @@
       </div>
     </div>
   </div>
+  <KeepDetailsModalComponent />
 </template>
 
 
@@ -22,6 +23,7 @@ import { keepsService } from "../services/KeepsService.js";
 import { logger } from "../utils/Logger.js";
 import { Modal } from "bootstrap";
 import { useRouter, useRoute } from "vue-router";
+import KeepDetailsModalComponent from "../components/KeepDetailsModalComponent.vue"
 
 export default {
   props: { keepProp: { type: Keep, required: true } },
@@ -37,7 +39,15 @@ export default {
 
       async setActiveKeep(keepId) {
         try {
-          await keepsService.setActiveKeep(keepId);
+          const page = route.name
+          logger.log("Page", page)
+          if (page == "Vault") {
+            await keepsService.setActiveVaultKeep(keepId)
+          } else if (page == "Profile") {
+            await keepsService.setActiveProfileKeep(keepId);
+          } else {
+            await keepsService.setActiveKeep(keepId);
+          }
         } catch (error) {
           Pop.error(error)
         }
@@ -47,12 +57,14 @@ export default {
         router.push({ name: 'Profile', params: { profileId: profileId } });
       },
 
+
       openModal() {
         Modal.getOrCreateInstance('#keepDetailsModal').show();
       }
 
     }
-  }
+  },
+  components: { KeepDetailsModalComponent }
 };
 </script>
 
