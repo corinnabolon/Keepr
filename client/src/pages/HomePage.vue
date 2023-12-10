@@ -15,6 +15,7 @@ import Pop from '../utils/Pop';
 import { keepsService } from "../services/KeepsService.js";
 import KeepSmallComponent from "../components/KeepSmallComponent.vue"
 import { accountService } from "../services/AccountService.js";
+import { vaultsService } from "../services/VaultsService.js";
 
 
 export default {
@@ -26,6 +27,7 @@ export default {
 
     onMounted(() => {
       keepsService.clearKeepData();
+      vaultsService.clearVaultData();
       getKeeps();
     })
 

@@ -23,17 +23,17 @@
                 <p class="fs-5">{{ activeKeep.description }}</p>
               </div>
               <div class="d-flex justify-content-between mb-2"
-                :class="account.id ? 'align-items-center' : 'align-self-end'">
-                <form v-if="account.id && route.name == 'Home'" @submit.prevent="addToVault"
+                :class="account.id && route.name != 'Vault' || account.id && route.name == 'Vault' && activeVault.creatorId == account.id ? 'align-items-center' : 'align-self-end'">
+                <form v-if="account.id && route.name != 'Vault'" @submit.prevent="addToVault"
                   class="d-flex justify-content-start">
                   <select v-model="editableVault" class="form-select w-50 me-2" aria-label="Select Vault" required>
-                    <option v-for="vault in myVaults" :key="vault.id" :value="vault">{{ vault.name }}
+                    <option v-for=" vault  in  myVaults " :key="vault.id" :value="vault">{{ vault.name }}
                     </option>
                   </select>
                   <button type="submit" class="btn btn-success">Save</button>
                 </form>
-                <div v-else-if="account.id && route.name == 'Vault'">
-                  <p class="mb-0"><i class="mdi mdi-cancel"></i>Remove</p>
+                <div v-else-if="account.id && route.name == 'Vault' && activeVault.creatorId == account.id">
+                  <p class="mb-0 ms-2"><i class="mdi mdi-cancel"></i>Remove</p>
                 </div>
                 <div class="d-flex" :class="account.id ? 'align-items-stretch' : ''">
                   <img :src="activeKeep.creator.picture" alt="Keep Creator Picture" :title="`{activeKeep.creator.name}`"
@@ -68,7 +68,7 @@ export default {
     onMounted(() => {
       let keepDetailsModalElem = document.getElementById('keepDetailsModal')
       keepDetailsModalElem.addEventListener('show.bs.modal', function (event) {
-        if (AppState.account.id && AppState.myVaults.length == 0 && route.name == "Home") {
+        if (AppState.account.id && AppState.myVaults.length == 0 && route.name != "Vault") {
           getMyVaults()
         }
       })
@@ -87,6 +87,7 @@ export default {
       route,
       account: computed(() => AppState.account),
       activeKeep: computed(() => AppState.activeKeep),
+      activeVault: computed(() => AppState.activeVault),
       myVaults: computed(() => AppState.myVaults),
 
       async addToVault() {
