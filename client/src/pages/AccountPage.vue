@@ -89,6 +89,7 @@ export default {
       profilesService.clearData();
       vaultsService.clearVaultData();
       getMyVaults();
+      setActiveProfile();
     })
 
     watch(account, () => {

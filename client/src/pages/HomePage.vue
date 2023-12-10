@@ -16,10 +16,12 @@ import { keepsService } from "../services/KeepsService.js";
 import KeepSmallComponent from "../components/KeepSmallComponent.vue"
 import { accountService } from "../services/AccountService.js";
 
+
 export default {
   setup() {
     const account = computed(() => AppState.account);
     const keeps = computed(() => AppState.keeps);
+
 
 
     onMounted(() => {
@@ -27,9 +29,9 @@ export default {
       getKeeps();
     })
 
-    watch(account, () => {
-      getMyVaults();
-    })
+    // watch(account, () => {
+    //   getMyVaults();
+    // })
 
     async function getKeeps() {
       try {
@@ -39,13 +41,13 @@ export default {
       }
     }
 
-    async function getMyVaults() {
-      try {
-        await accountService.getMyVaults();
-      } catch (error) {
-        Pop.error(error);
-      }
-    }
+    // async function getMyVaults() {
+    //   try {
+    //     await accountService.getMyVaults();
+    //   } catch (error) {
+    //     Pop.error(error);
+    //   }
+    // }
 
     return {
       account,
