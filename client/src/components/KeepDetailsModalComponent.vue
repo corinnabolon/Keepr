@@ -22,21 +22,23 @@
                 <p class="fs-4">{{ activeKeep.name }}</p>
                 <p class="fs-5">{{ activeKeep.description }}</p>
               </div>
-              <div class="d-flex justify-content-between mb-2"
-                :class="account.id && route.name != 'Vault' || account.id && route.name == 'Vault' && activeVault.creatorId == account.id ? 'align-items-center' : 'align-self-end'">
-                <form v-if="account.id && route.name != 'Vault'" @submit.prevent="addToVault"
-                  class="d-flex justify-content-start">
+              <div class="d-flex justify-content-between mb-2 align-items-center">
+                <div v-if="account.id && route.name == 'Vault' && activeVault.creatorId == account.id">
+                  <p class="mb-0 ms-2"><i class="mdi mdi-cancel"></i>Remove</p>
+                </div>
+                <form v-else-if="account.id" @submit.prevent="addToVault" class="d-flex justify-content-start">
                   <select v-model="editableVault" class="form-select w-50 me-2" aria-label="Select Vault" required>
                     <option v-for=" vault  in  myVaults " :key="vault.id" :value="vault">{{ vault.name }}
                     </option>
                   </select>
                   <button type="submit" class="btn btn-success">Save</button>
                 </form>
-                <div v-else-if="account.id && route.name == 'Vault' && activeVault.creatorId == account.id">
-                  <p class="mb-0 ms-2"><i class="mdi mdi-cancel"></i>Remove</p>
+                <div v-else-if="!account.id">
+                  <p class="mb-0"><span class="text-info" role="button" @click="login">Log in</span> to collect keeps!</p>
                 </div>
-                <div class="d-flex" :class="account.id ? 'align-items-stretch' : ''">
-                  <img :src="activeKeep.creator.picture" alt="Keep Creator Picture" :title="`{activeKeep.creator.name}`"
+                <div @click.stop="goProfilePage(activeKeep.creatorId)" class="d-flex align-items-stretch"
+                  :role="route.name == 'Profile' ? '' : 'button'">
+                  <img :src="activeKeep.creator.picture" alt="Keep Creator Picture" :title="`${activeKeep.creator.name}`"
                     class="user-image rounded-circle">
                   <p class="mb-0 ms-2 align-self-center">{{ activeKeep.creator.name }}</p>
                 </div>
@@ -57,18 +59,20 @@ import Pop from "../utils/Pop.js";
 import { vaultKeepsService } from "../services/VaultKeepsService.js";
 import { Modal } from "bootstrap";
 import { accountService } from "../services/AccountService.js";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
+import { AuthService } from '../services/AuthService'
 
 export default {
 
   setup() {
     let editableVault = ref({});
     const route = useRoute();
+    const router = useRouter();
 
     onMounted(() => {
       let keepDetailsModalElem = document.getElementById('keepDetailsModal')
       keepDetailsModalElem.addEventListener('show.bs.modal', function (event) {
-        if (AppState.account.id && AppState.myVaults.length == 0 && route.name != "Vault") {
+        if (AppState.account.id && AppState.myVaults.length == 0) {
           getMyVaults()
         }
       })
@@ -99,6 +103,15 @@ export default {
         } catch (error) {
           Pop.error(error);
         }
+      },
+
+      async login() {
+        AuthService.loginWithPopup()
+      },
+
+      goProfilePage(profileId) {
+        router.push({ name: 'Profile', params: { profileId: profileId } });
+        Modal.getOrCreateInstance("#keepDetailsModal").hide();
       },
 
     }
