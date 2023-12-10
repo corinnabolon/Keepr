@@ -28,21 +28,28 @@
         <img :src="account.picture" alt="Account picture" title="Your Account picture"
           class="account-picture rounded-circle">
       </div>
-      <div class="col-8 d-flex justify-content-between">
-        <p></p>
-        <p class="mt-3 ms-5 fs-5">{{ myVaults.length }} Vaults | {{ myKeeps.length }} Keeps</p>
-        <p v-if="!editingAccountInfo" class="fs-4" @click="flipWantsToEditAccountInfo" role="button"><i
-            class="mdi mdi-dots-horizontal text-end" title="Edit Account Information"
-            :class="editingAccountInfo ? 'invisible' : 'visible'"></i></p>
-        <button v-else @click="cancelEdits" class="btn btn-danger mt-2 me-3 px-3">Cancel Edits</button>
+      <div class="col-8">
+        <section class="row">
+          <div class="col-4"></div>
+          <div class="col-5 mt-3">
+            <p class="ms-5 fs-5 mb-5">{{ myVaults.length }} Vaults | {{ myKeeps.length }} Keeps</p>
+          </div>
+          <div class="col-3 d-flex justify-content-end">
+            <p v-if="!editingAccountInfo" class="fs-4 mt-2" @click="flipWantsToEditAccountInfo" role="button"><i
+                class="mdi mdi-dots-horizontal text-end" title="Edit Account Information"
+                :class="editingAccountInfo ? 'invisible' : 'visible'"></i></p>
+            <button v-else @click="cancelEdits" class="btn btn-danger mt-2 me-3 px-3 py-0 cancel-button">Cancel
+              Edits</button>
+          </div>
+        </section>
       </div>
     </section>
-    <section class="row justify-content-center">
+    <!-- <section class="row justify-content-center">
       <div class="col-7 text-center large-margin-top">
         <p>{{ myVaults.length }} Vaults | {{ myKeeps.length }} Keeps</p>
       </div>
-    </section>
-    <section class="row">
+    </section> -->
+    <section class="row large-margin-top">
       <p class="fs-2 fw-bold mb-0 ms-1">Vaults</p>
       <div v-for="vault in myVaults" :key="vault.id" class="col-3">
         <VaultSmallComponent :vaultProp="vault" />
@@ -162,6 +169,10 @@ input {
 .submit-button {
   margin-left: 67%;
   margin-right: 2%;
+}
+
+.cancel-button {
+  height: 2.5rem;
 }
 
 .account-coverImg {
