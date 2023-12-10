@@ -39,15 +39,7 @@ export default {
 
       async setActiveKeep(keepId) {
         try {
-          const page = route.name
-          logger.log("Page", page)
-          if (page == "Vault") {
-            await keepsService.setActiveVaultKeep(keepId)
-          } else if (page == "Profile") {
-            await keepsService.setActiveProfileKeep(keepId);
-          } else {
-            await keepsService.setActiveKeep(keepId);
-          }
+          await keepsService.getKeepByIdAndSetAsActive(keepId)
           logger.log("ActiveKeep", AppState.activekeep)
         } catch (error) {
           Pop.error(error)

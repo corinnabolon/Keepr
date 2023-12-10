@@ -12,22 +12,12 @@ class KeepsService {
     //TODO: ask re the order they are coming in
   }
 
-  setActiveKeep(keepId) {
-    AppState.activeKeep = AppState.keeps.find(keep => keep.id == keepId);
-    logger.log("ACTIVEKEEP from the Service!", AppState.activeKeep)
+  async getKeepByIdAndSetAsActive(keepId) {
+    AppState.activeKeep = null
+    const res = await api.get(`api/keeps/${keepId}`)
+    logger.log("res.data", res.data)
+    AppState.activeKeep = new Keep(res.data)
   }
-
-  setActiveVaultKeep(keepId) {
-    AppState.activeKeep = AppState.vaultKeeps.find(keep => keep.id == keepId);
-    logger.log("ACTIVEKEEP from the Service!", AppState.activeKeep)
-  }
-
-
-  setActiveProfileKeep(keepId) {
-    AppState.activeKeep = AppState.profileKeeps.find(keep => keep.id == keepId);
-    logger.log("ACTIVEKEEP from the Service!", AppState.activeKeep)
-  }
-
 
   async createKeep(keepData) {
     const res = await api.post("api/keeps", keepData)
