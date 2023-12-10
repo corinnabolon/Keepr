@@ -31,7 +31,6 @@ import { vaultsService } from "../services/VaultsService.js";
 import VaultCoverComponent from "../components/VaultCoverComponent.vue"
 import KeepSmallComponent from "../components/KeepSmallComponent.vue"
 import { keepsService } from "../services/KeepsService.js";
-import { logger } from "../utils/Logger.js";
 
 export default {
   setup() {

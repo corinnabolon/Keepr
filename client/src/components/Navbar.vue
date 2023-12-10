@@ -8,7 +8,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
         <ul class="navbar-nav">
-          <li class="nav-item dropdown">
+          <li v-if="account.id" class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
               Create
@@ -53,10 +53,11 @@
 </template>
 
 <script>
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, computed } from 'vue';
 import { loadState, saveState } from '../utils/Store.js';
 import CreateKeepModal from "./CreateKeepModal.vue";
 import CreateVaultModal from "./CreateVaultModal.vue";
+import { AppState } from '../AppState'
 
 import Login from './Login.vue';
 export default {
@@ -69,6 +70,7 @@ export default {
 
     return {
       theme,
+      account: computed(() => AppState.account),
       toggleTheme() {
         theme.value = theme.value == 'light' ? 'dark' : 'light'
         document.documentElement.setAttribute('data-bs-theme', theme.value)

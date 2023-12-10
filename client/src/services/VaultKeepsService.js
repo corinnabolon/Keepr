@@ -18,14 +18,11 @@ class VaultKeepsService {
     }
     vaultKeepData.vaultId = vaultId
     vaultKeepData.keepId = vaultKeepData.id
-    logger.log("vaultKeepData after adding vaultId and keepId", vaultKeepData)
     //TODO: check all account's current vaultkeeps to make sure not duplicating--back end won't allow it--or get rid of "unique" on the back end OR figure out how to throw better error message
     const res = await api.post("api/vaultkeeps", vaultKeepData)
-    logger.log("After posted", res.data)
     vaultKeepData.vaultKeepId = res.data.id
     const newVaultKeep = new KeepInVault(vaultKeepData)
-    AppState.activeKeep.kept++,
-      logger.log("KeepInVault", newVaultKeep)
+    AppState.activeKeep.kept++
   }
 
   async removeFromVault(keepId) {
@@ -35,7 +32,6 @@ class VaultKeepsService {
     }
     let vaultKeepId = vaultKeepToDelete.vaultKeepId
     const res = await api.delete(`api/vaultkeeps/${vaultKeepId}`)
-    logger.log(res.data)
     const vaultKeepIndex = AppState.vaultKeeps.findIndex(vaultkeep => vaultkeep.id == keepId)
     AppState.vaultKeeps.splice(vaultKeepIndex, 1)
   }

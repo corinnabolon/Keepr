@@ -15,16 +15,19 @@ class KeepsService {
   async getKeepByIdAndSetAsActive(keepId) {
     AppState.activeKeep = null
     const res = await api.get(`api/keeps/${keepId}`)
-    logger.log("res.data", res.data)
     AppState.activeKeep = new Keep(res.data)
   }
 
-  async createKeep(keepData) {
+  async createKeep(keepData, route) {
     const res = await api.post("api/keeps", keepData)
     logger.log(res.data)
-    AppState.keeps.push(new Keep(res.data))
-    //TODO make sure this will show up if I'm creating from my profile page, too
+    if (route.name == "Home") {
+      AppState.keeps.push(new Keep(res.data))
+    } else if (route.name == "Account" || route.params.profileId == AppState.account.id) {
+      AppState.profileKeeps.push(new Keep(res.data))
+    }
   }
+  //TODO make sure this will show up if I'm creating from my profile page, too
 
   clearKeepData() {
     AppState.activeKeep = null,

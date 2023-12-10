@@ -37,10 +37,12 @@ import { computed, reactive, onMounted, ref } from 'vue';
 import Pop from "../utils/Pop.js";
 import { keepsService } from "../services/KeepsService.js";
 import { Modal } from "bootstrap";
+import { useRoute } from "vue-router";
 
 export default {
   setup() {
     let editableKeep = ref({})
+    const route = useRoute();
 
     onMounted(() => {
       const createKeepModalElem = document.getElementById('createKeepModal')
@@ -50,12 +52,13 @@ export default {
     })
 
     return {
+      route,
       editableKeep,
 
       async createKeep() {
         try {
           const keepData = editableKeep.value
-          await keepsService.createKeep(keepData)
+          await keepsService.createKeep(keepData, route)
           Pop.success("Keep created!")
           editableKeep.value = {}
           Modal.getOrCreateInstance("#createKeepModal").hide()

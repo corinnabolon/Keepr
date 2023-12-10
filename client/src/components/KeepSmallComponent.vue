@@ -6,7 +6,7 @@
         :class="[route.name == 'Home' ? 'justify-content-around' : 'justify-content-start ms-2']">
         <p class="mb-0 text-light fw-bold">{{ keepProp.name }}</p>
         <img v-if="route.name == 'Home'" @click.stop="goProfilePage(keepProp.creatorId)" :src="keepProp.creator.picture"
-          class="user-image rounded-circle">
+          class="user-image rounded-circle" :title="`Go to ${keepProp.creator.name}'s Profile`">
       </div>
     </div>
   </div>
@@ -20,7 +20,6 @@ import { computed, reactive, onMounted } from 'vue';
 import { Keep } from "../models/Keep.js";
 import Pop from '../utils/Pop';
 import { keepsService } from "../services/KeepsService.js";
-import { logger } from "../utils/Logger.js";
 import { Modal } from "bootstrap";
 import { useRouter, useRoute } from "vue-router";
 import KeepDetailsModalComponent from "../components/KeepDetailsModalComponent.vue"
@@ -40,7 +39,6 @@ export default {
       async setActiveKeep(keepId) {
         try {
           await keepsService.getKeepByIdAndSetAsActive(keepId)
-          logger.log("ActiveKeep", AppState.activekeep)
         } catch (error) {
           Pop.error(error)
         }

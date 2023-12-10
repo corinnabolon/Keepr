@@ -40,7 +40,6 @@ import { profilesService } from "../services/ProfilesService.js";
 import KeepSmallComponent from "../components/KeepSmallComponent.vue"
 import VaultSmallComponent from "../components/VaultSmallComponent.vue"
 import KeepDetailsModalComponent from "../components/KeepDetailsModalComponent.vue"
-import { logger } from "../utils/Logger.js";
 import { keepsService } from "../services/KeepsService.js";
 import { accountService } from "../services/AccountService.js";
 import { vaultsService } from "../services/VaultsService.js";
