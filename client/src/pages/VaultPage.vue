@@ -7,6 +7,7 @@
     </section>
     <section class="row justify-content-center mt-3">
       <div class="col-2 text-center">
+        <p>{{ activeVault.description }}</p>
         <p class="bg-info rounded-pill mx-3">{{ vaultKeeps.length }} {{ keepPluralOrSingular }}</p>
       </div>
     </section>

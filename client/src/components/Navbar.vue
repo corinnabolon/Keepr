@@ -16,7 +16,8 @@
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
               <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#createKeepModal">New Keep</a>
               </li>
-              <li><a class="dropdown-item" href="#">New Vault</a></li>
+              <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#createVaultModal">New
+                  Vault</a></li>
             </ul>
           </li>
         </ul>
@@ -55,6 +56,7 @@
 import { onMounted, ref } from 'vue';
 import { loadState, saveState } from '../utils/Store.js';
 import CreateKeepModal from "./CreateKeepModal.vue";
+import CreateVaultModal from "./CreateVaultModal.vue";
 
 import Login from './Login.vue';
 export default {
@@ -74,7 +76,7 @@ export default {
       }
     }
   },
-  components: { Login, CreateKeepModal }
+  components: { Login, CreateKeepModal, CreateVaultModal }
 }
 </script>
 

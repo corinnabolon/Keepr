@@ -33,6 +33,7 @@ class KeepsService {
     const res = await api.post("api/keeps", keepData)
     logger.log(res.data)
     AppState.keeps.push(new Keep(res.data))
+    //TODO make sure this will show up if I'm creating from my profile page, too
   }
 
   clearKeepData() {

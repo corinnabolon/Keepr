@@ -7,6 +7,7 @@
   </main>
   <KeepDetailsModalComponent />
   <CreateKeepModal />
+  <CreateVaultModal />
 </template>
 
 <script>
@@ -15,6 +16,7 @@ import { AppState } from './AppState'
 import Navbar from './components/Navbar.vue'
 import KeepDetailsModalComponent from "./components/KeepDetailsModalComponent.vue"
 import CreateKeepModal from "./components/CreateKeepModal.vue"
+import CreateVaultModal from "./components/CreateVaultModal.vue"
 
 export default {
   setup() {
@@ -22,7 +24,7 @@ export default {
       appState: computed(() => AppState)
     }
   },
-  components: { Navbar, KeepDetailsModalComponent, CreateKeepModal }
+  components: { Navbar, KeepDetailsModalComponent, CreateKeepModal, CreateVaultModal }
 }
 </script>
 <style lang="scss">

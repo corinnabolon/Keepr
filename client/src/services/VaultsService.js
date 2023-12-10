@@ -21,6 +21,12 @@ class VaultsService {
     AppState.vaultKeeps = res.data.map((pojo) => new Keep(pojo))
   }
 
+  async createVault(vaultData) {
+    logger.log("Just a sec", vaultData)
+    const res = await api.post("api/vaults", vaultData)
+    AppState.myVaults.push(new Vault(res.data))
+  }
+
   clearVaultData() {
     AppState.activeVault = null;
     AppState.activeVaultArray.length = 0;
