@@ -3,6 +3,7 @@ import { Vault } from "../models/Vault.js"
 import { logger } from "../utils/Logger.js"
 import { api } from "./AxiosService.js"
 import { Keep } from "../models/Keep.js"
+import { KeepInVault } from "../models/KeepInVault.js"
 
 class VaultsService {
 
@@ -18,7 +19,7 @@ class VaultsService {
   async getKeepsInVault(vaultId) {
     const res = await api.get(`api/vaults/${vaultId}/keeps`)
     logger.log("Got keeps for this vault", res.data)
-    AppState.vaultKeeps = res.data.map((pojo) => new Keep(pojo))
+    AppState.vaultKeeps = res.data.map((pojo) => new KeepInVault(pojo))
   }
 
   async createVault(vaultData) {

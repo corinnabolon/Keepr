@@ -23,7 +23,8 @@
                 <p class="fs-5">{{ activeKeep.description }}</p>
               </div>
               <div class="d-flex justify-content-between mb-2 align-items-center">
-                <div v-if="account.id && route.name == 'Vault' && activeVault.creatorId == account.id">
+                <div v-if="account.id && route.name == 'Vault' && activeVault.creatorId == account.id" role="button"
+                  @click="removeFromVault(activeKeep.id)">
                   <p class="mb-0 ms-2"><i class="mdi mdi-cancel"></i>Remove</p>
                 </div>
                 <form v-else-if="account.id" @submit.prevent="addToVault" class="d-flex justify-content-start">
@@ -98,8 +99,19 @@ export default {
         try {
           const vault = editableVault.value
           const vaultId = vault.id
-          await vaultKeepsService.addToVault(vaultId);
+          const routename = route.name
+          await vaultKeepsService.addToVault(vaultId, routename);
           Pop.success(`${AppState.activeKeep.name} added to ${vault.name}`)
+        } catch (error) {
+          Pop.error(error);
+        }
+      },
+
+      async removeFromVault(keepId) {
+        try {
+          await vaultKeepsService.removeFromVault(keepId);
+          Pop.success(`${AppState.activeKeep.name} removed from ${AppState.activeVault.name}`)
+          Modal.getOrCreateInstance("#keepDetailsModal").hide()
         } catch (error) {
           Pop.error(error);
         }
