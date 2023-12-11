@@ -60,6 +60,9 @@ export default {
         await vaultsService.getKeepsInVault(vaultId);
       } catch (error) {
         Pop.error(error)
+        if (error.response.data.includes("Something")) {
+          router.push({ name: "Home" })
+        }
       }
     }
 

@@ -1,8 +1,9 @@
 <template>
-  <div @click="setActiveKeep(keepProp.id)" class="text-center">
-    <div class="keep-coverImg rounded box-shadow my-3 mx-1 d-flex flex-column justify-content-end position-relative"
-      @click="openModal" role="button" :title='`See details of this keep, "${keepProp.name}"`'>
-      <p v-if="wantsToDeleteKeeps" @click.stop="destroyKeep(keepProp.id)"
+  <div @click="setActiveKeep(keepProp.id)">
+    <img :src="keepProp.img" class="img-fluid">
+    <!-- <div class="keep-coverImg img-fluid"></div> -->
+    <!-- <div class="keep-coverImg" @click="openModal" role="button" :title='`See details of this keep, "${keepProp.name}"`'> -->
+    <!-- <p v-if="wantsToDeleteKeeps" @click.stop="destroyKeep(keepProp.id)"
         class="fs-4 text-danger align-self-end delete-icon">
         <i class="mdi mdi-close-circle" title="Delete this Keep"></i>
       </p>
@@ -11,8 +12,8 @@
         <p class="mb-0 text-light fw-bold">{{ keepProp.name }}</p>
         <img v-if="route.name == 'Home'" @click.stop="goProfilePage(keepProp.creatorId)" :src="keepProp.creator.picture"
           class="user-image rounded-circle" :title="`Go to ${keepProp.creator.name}'s Profile`">
-      </div>
-    </div>
+      </div> -->
+    <!-- </div> -->
   </div>
   <KeepDetailsModalComponent />
 </template>
@@ -82,11 +83,11 @@ export default {
 .keep-coverImg {
   // position: relative;
   background-image: v-bind(keepCoverImg);
-  background-size: cover;
-  background-position: center;
-  height: 30dvh;
-  aspect-ratio: 1/1;
-  // object-fit: cover;
+  // background-size: cover;
+  // background-position: center;
+  width: 100%;
+  // aspect-ratio: unset;
+  object-fit: contain;
 }
 
 .user-image {

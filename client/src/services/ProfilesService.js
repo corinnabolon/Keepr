@@ -40,6 +40,7 @@ class ProfilesService {
     try {
       const res = await api.get(`api/profiles/${profileId}/vaults`)
       AppState.profileVaults = res.data.map((pojo) => new Vault(pojo))
+      logger.log("Active profile vaults:", AppState.profileVaults)
     } catch {
       logger.log("Could not get Vaults for this Profile.")
     }
