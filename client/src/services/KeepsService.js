@@ -22,9 +22,9 @@ class KeepsService {
     const res = await api.post("api/keeps", keepData)
     logger.log(res.data)
     if (route.name == "Home") {
-      AppState.keeps.push(new Keep(res.data))
+      AppState.keeps.unshift(new Keep(res.data))
     } else if (route.name == "Account" || route.params.profileId == AppState.account.id) {
-      AppState.profileKeeps.push(new Keep(res.data))
+      AppState.profileKeeps.unshift(new Keep(res.data))
     }
   }
 

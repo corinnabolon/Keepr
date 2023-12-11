@@ -2,25 +2,27 @@
   <nav class="navbar navbar-expand-lg bg-theme-beige text-theme-dracula-orchid font-menu box-shadow nav-height">
     <div class="container-fluid justify-content-between">
       <div class="d-flex">
-        <a class="navbar-brand bg-theme-pink rounded ms-3 px-3 py-1" href="#">Home</a>
+        <a class="navbar-brand bg-theme-pink home rounded mt-1 ms-3 px-3 py-1 fs-4" href="#">
+          <p class="mb-0">Home</p>
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown"
           aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div>
           <ul class="navbar-nav">
-            <li v-if="account.id" class="dropdown font-menu fw-bold">
+            <li v-if="account.id" class="dropdown font-menu fw-bold fs-4">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
                 data-bs-toggle="dropdown" aria-expanded="false">
                 Create
               </a>
               <ul class="dropdown-menu bg-theme-violet" aria-labelledby="navbarDarkDropdownMenuLink">
-                <li><a class="dropdown-item menu-theme font-menu fw-bold" href="#" data-bs-toggle="modal"
-                    data-bs-target="#createKeepModal">New Keep</a>
+                <li><a class="dropdown-item menu-theme font-menu fw-bold fs-4" href="#" data-bs-toggle="modal"
+                    data-bs-target="#createKeepModal">new keep</a>
                 </li>
-                <li><a class="dropdown-item font-menu menu-theme fw-bold" href="#" data-bs-toggle="modal"
-                    data-bs-target="#createVaultModal">New
-                    Vault</a></li>
+                <li><a class="dropdown-item font-menu menu-theme fw-bold fs-4" href="#" data-bs-toggle="modal"
+                    data-bs-target="#createVaultModal">new
+                    vault</a></li>
               </ul>
             </li>
           </ul>
@@ -120,7 +122,11 @@ a:hover {
 } */
 
 .theme-img {
-  height: 56px;
+  height: 66px;
+}
+
+.home {
+  height: 100%;
 }
 
 .navbar-nav .router-link-exact-active {
