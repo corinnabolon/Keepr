@@ -1,7 +1,8 @@
 <template>
   <div @click="setActiveKeep(keepProp.id)">
-    <img :src="keepProp.img" class="img-fluid">
-    <!-- <div class="keep-coverImg img-fluid"></div> -->
+    <div class="keep-coverImg img-fluid">
+      <img :src="keepProp.img" class="invisible img-fluid">
+    </div>
     <!-- <div class="keep-coverImg" @click="openModal" role="button" :title='`See details of this keep, "${keepProp.name}"`'> -->
     <!-- <p v-if="wantsToDeleteKeeps" @click.stop="destroyKeep(keepProp.id)"
         class="fs-4 text-danger align-self-end delete-icon">
@@ -83,11 +84,12 @@ export default {
 .keep-coverImg {
   // position: relative;
   background-image: v-bind(keepCoverImg);
-  // background-size: cover;
+  background-size: 100%;
   // background-position: center;
   width: 100%;
-  // aspect-ratio: unset;
-  object-fit: contain;
+  // height: 20rem;
+  // aspect-ratio: 1/1;
+  object-fit: cover;
 }
 
 .user-image {

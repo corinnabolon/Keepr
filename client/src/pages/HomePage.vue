@@ -68,6 +68,7 @@ export default {
 <style scoped lang="scss">
 .masonry {
   columns: 17dvw;
+  height: auto;
 }
 
 .home {
