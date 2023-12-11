@@ -1,11 +1,11 @@
 <template>
   <div class="container">
     <section class="row">
-      <div class="col-12">
-        <div class="masonry mt-4">
-          <div v-for="keep in keeps" :key="keep.id" class="mx-2">
-            <KeepSmallComponent :keepProp="keep" />
-          </div>
+      <div class="masonry mt-4">
+        <!-- <div class="masonry mt-4"> -->
+        <div v-for="keep in keeps" :key="keep.id" class="col-3 mx-2 basis">
+          <KeepSmallComponent :keepProp="keep" />
+          <!-- </div> -->
         </div>
       </div>
     </section>
@@ -67,8 +67,15 @@ export default {
 
 <style scoped lang="scss">
 .masonry {
-  columns: 18dvw;
+  // columns: 18dvw;
+  column-count: 4;
 }
+
+.basis {
+  display: inline-block;
+  width: 100%;
+}
+
 
 .home {
   display: grid;

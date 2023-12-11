@@ -40,4 +40,13 @@ footer {
   place-content: center;
   height: 32px;
 }
+
+.masonry {
+  column-count: 4;
+}
+
+.basis {
+  display: inline-block;
+  width: 100%;
+}
 </style>

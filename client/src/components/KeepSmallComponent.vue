@@ -6,10 +6,13 @@
       <p v-if="wantsToDeleteKeeps" @click.stop="destroyKeep(keepProp.id)" class="fs-4 text-danger delete-icon">
         <i class="mdi mdi-close-circle" title="Delete this Keep"></i>
       </p>
-      <p class="mb-0 mt-3 ms-3 text-light fw-bold d-inline-block float-start">{{ keepProp.name }}</p>
-      <img v-if="route.name == 'Home'" @click.stop="goProfilePage(keepProp.creatorId)" :src="keepProp.creator.picture"
-        class="user-image rounded-circle d-inline-block float-right" :title="`Go to ${keepProp.creator.name}'s Profile`">
+      <div class="d-flex align-items-center justify-content-between mt-5 ms-2">
+        <p class="mb-0 text-light fw-bold">{{ keepProp.name }}</p>
+        <img v-if="route.name == 'Home'" @click.stop="goProfilePage(keepProp.creatorId)" :src="keepProp.creator.picture"
+          class="user-image rounded-circle me-2" :title="`Go to ${keepProp.creator.name}'s Profile`">
+      </div>
     </div>
+
   </div>
   <KeepDetailsModalComponent />
 </template>
@@ -82,13 +85,13 @@ export default {
   background-size: cover;
   background-position: center;
   width: 100%;
-  object-fit: cover;
+  aspect-ratio: 1/1;
 }
 
 .user-image {
   height: 8dvh;
   aspect-ratio: 1/1;
-  // object-fit: cover;
+  object-fit: cover;
   margin-bottom: 10px;
 }
 
@@ -98,8 +101,8 @@ export default {
 
 .delete-icon {
   position: absolute;
-  top: -8%;
-  left: 92%;
+  top: -4%;
+  left: 94%;
 }
 
 .hidden {

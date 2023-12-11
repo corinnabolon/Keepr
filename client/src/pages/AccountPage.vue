@@ -64,8 +64,10 @@
             title="Choose Keeps to Delete"></i></p>
         <p class="fs-2 fw-bold mb-0 ms-1">Keeps</p>
       </div>
-      <div v-for="keep in myKeeps" :key="keep.id" class="col-3">
-        <KeepSmallComponent :keepProp="keep" />
+      <div class="masonry mt-4">
+        <div v-for="keep in myKeeps" :key="keep.id" class="col-3 mx-2 basis">
+          <KeepSmallComponent :keepProp="keep" />
+        </div>
       </div>
     </section>
   </div>

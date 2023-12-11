@@ -19,10 +19,11 @@
           Edits</button>
       </div>
     </section>
-
     <section class="row justify-content-center">
-      <div v-for="keep in vaultKeeps" :key="keep.id" class="col-6">
-        <KeepSmallComponent :keepProp="keep" />
+      <div class="masonry mt-4">
+        <div v-for="keep in vaultKeeps" :key="keep.id" class="col-3 mx-2 basis">
+          <KeepSmallComponent :keepProp="keep" />
+        </div>
       </div>
     </section>
 
