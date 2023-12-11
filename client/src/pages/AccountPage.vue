@@ -13,13 +13,13 @@
           </div>
           <div class="mb-3 mx-4">
             <p class="form-label ps-4 py-1 w-50">User Picture URL:</p>
-            <input v-model="editableAccount.picture" type="url" class="form-control" id="picture"
-              placeholder="Picture URL..." required maxLength="1000">
+            <input v-model="editableAccount.picture" type="url" class="form-control" id="picture" required
+              maxLength="1000">
           </div>
           <div class="mb-3 mx-4">
             <p class="form-label ps-4 py-1 w-50">Cover Image URL:</p>
-            <input v-model="editableAccount.coverImg" type="url" class="form-control" id="coverImg"
-              placeholder="Cover Image URL..." required maxLength="1000">
+            <input v-model="editableAccount.coverImg" type="url" class="form-control" id="coverImg" required
+              maxLength="1000">
           </div>
           <div class="d-flex">
             <button class="btn btn-success submit-button" type="submit">Save Changes</button>
@@ -36,8 +36,7 @@
           </div>
           <div class="col-3 d-flex justify-content-end">
             <p v-if="!editingAccountInfo" class="fs-4 mt-2" @click="flipWantsToEditAccountInfo" role="button"><i
-                class="mdi mdi-dots-horizontal text-end" title="Edit Account Information"
-                :class="editingAccountInfo ? 'invisible' : 'visible'"></i></p>
+                class="mdi mdi-dots-horizontal text-end" title="Edit Account Information"></i></p>
             <button v-else @click="cancelEdits" class="btn btn-danger mt-2 me-3 px-3 py-0 cancel-button">Cancel
               Edits</button>
           </div>
@@ -50,13 +49,21 @@
       </div>
     </section> -->
     <section class="row large-margin-top">
-      <p class="fs-2 fw-bold mb-0 ms-1">Vaults</p>
+      <div class="d-flex align-items-center mt-5">
+        <p class="fs-3 mb-0" @click="flipWantsToDeleteVaults" role="button"><i class="mdi mdi-dots-vertical text-end"
+            title="Choose Vaults to Delete"></i></p>
+        <p class="fs-2 fw-bold mb-0 ms-1">Vaults</p>
+      </div>
       <div v-for="vault in myVaults" :key="vault.id" class="col-3">
         <VaultSmallComponent :vaultProp="vault" />
       </div>
     </section>
     <section class="row">
-      <p class="fs-2 fw-bold mt-5 mb-0 ms-1">Keeps</p>
+      <div class="d-flex align-items-center mt-5">
+        <p class="fs-3 mb-0" @click="flipWantsToDeleteKeeps" role="button"><i class="mdi mdi-dots-vertical text-end"
+            title="Choose Keeps to Delete"></i></p>
+        <p class="fs-2 fw-bold mb-0 ms-1">Keeps</p>
+      </div>
       <div v-for="keep in myKeeps" :key="keep.id" class="col-3">
         <KeepSmallComponent :keepProp="keep" />
       </div>
@@ -125,6 +132,10 @@ export default {
         editingAccountInfo.value = true;
       },
 
+      flipWantsToDeleteVaults() {
+        AppState.wantsToDeleteVaults = !AppState.wantsToDeleteVaults;
+      },
+
       async cancelEdits() {
         try {
           editingAccountInfo.value = false;
@@ -145,6 +156,10 @@ export default {
         } catch (error) {
           Pop.error(error)
         }
+      },
+
+      flipWantsToDeleteKeeps() {
+        AppState.wantsToDeleteKeeps = !AppState.wantsToDeleteKeeps;
       }
 
 

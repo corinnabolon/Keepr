@@ -27,7 +27,14 @@ class KeepsService {
       AppState.profileKeeps.push(new Keep(res.data))
     }
   }
-  //TODO make sure this will show up if I'm creating from my profile page, too
+
+  async destroyKeep(keepId, route) {
+    const res = await api.delete(`api/keeps/${keepId}`)
+    if (route.name == "Account" || route.name == "Profile" && route.params.profileId == AppState.account.id) {
+      const keepIndex = AppState.profileKeeps.findIndex(keep => keep.id == keepId)
+      AppState.profileKeeps.splice(keepIndex, 1)
+    }
+  }
 
   clearKeepData() {
     AppState.activeKeep = null,

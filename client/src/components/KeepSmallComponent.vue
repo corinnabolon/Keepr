@@ -1,7 +1,11 @@
 <template>
   <div @click="setActiveKeep(keepProp.id)" class="text-center">
-    <div class="keep-coverImg rounded box-shadow my-3 mx-1 d-flex flex-column justify-content-end" @click="openModal"
-      role="button" :title='`See details of this keep, "${keepProp.name}"`'>
+    <div class="keep-coverImg rounded box-shadow my-3 mx-1 d-flex flex-column justify-content-end position-relative"
+      @click="openModal" role="button" :title='`See details of this keep, "${keepProp.name}"`'>
+      <p v-if="wantsToDeleteKeeps" @click.stop="destroyKeep(keepProp.id)"
+        class="fs-4 text-danger align-self-end delete-icon">
+        <i class="mdi mdi-close-circle" title="Delete this Keep"></i>
+      </p>
       <div class="d-flex align-items-center my-2"
         :class="[route.name == 'Home' ? 'justify-content-around' : 'justify-content-start ms-2']">
         <p class="mb-0 text-light fw-bold">{{ keepProp.name }}</p>
@@ -34,11 +38,25 @@ export default {
     return {
       router,
       route,
+      wantsToDeleteKeeps: computed(() => AppState.wantsToDeleteKeeps),
       keepCoverImg: computed(() => `url(${props.keepProp?.img})`),
 
       async setActiveKeep(keepId) {
         try {
           await keepsService.getKeepByIdAndSetAsActive(keepId)
+        } catch (error) {
+          Pop.error(error)
+        }
+      },
+
+      async destroyKeep(keepId) {
+        try {
+          let yes = await Pop.confirm("Are you sure you want to delete this Keep?")
+          if (!yes) {
+            return
+          }
+          await keepsService.destroyKeep(keepId, route)
+          Pop.success("Keep deleted")
         } catch (error) {
           Pop.error(error)
         }
@@ -79,5 +97,11 @@ export default {
 
 .box-shadow {
   box-shadow: 2px 5px 5px gray;
+}
+
+.delete-icon {
+  position: absolute;
+  top: -8%;
+  left: 92%;
 }
 </style>

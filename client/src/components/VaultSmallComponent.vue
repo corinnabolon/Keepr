@@ -1,7 +1,11 @@
 <template>
   <div>
-    <div class="vault-coverImg rounded box-shadow my-3 mx-1 d-flex flex-column justify-content-end"
+    <div class="vault-coverImg rounded box-shadow my-3 mx-1 d-flex flex-column justify-content-end position-relative"
       @click="goVaultPage(vaultProp.id)" role="button" :title='`Go to Vault page of "${vaultProp.name}"`'>
+      <p v-if="wantsToDeleteVaults" @click.stop="destroyVault(vaultProp.id)"
+        class="fs-4 text-danger align-self-end delete-icon">
+        <i class="mdi mdi-close-circle" title="Delete this Vault"></i>
+      </p>
       <div class=" d-flex align-items-end justify-content-between my-1">
         <p class="text-light fw-bold ms-1 mb-1">{{ vaultProp.name.toUpperCase() }}</p>
         <div v-if="vaultProp.isPrivate" class="bg-light lock-bg m-1">
@@ -18,6 +22,8 @@ import { AppState } from '../AppState';
 import { computed, reactive, onMounted } from 'vue';
 import { Vault } from "../models/Vault.js";
 import { useRouter } from "vue-router";
+import Pop from "../utils/Pop.js";
+import { vaultsService } from "../services/VaultsService.js";
 
 export default {
   props: { vaultProp: { type: Vault, required: true } },
@@ -27,11 +33,25 @@ export default {
 
     return {
       router,
+      wantsToDeleteVaults: computed(() => AppState.wantsToDeleteVaults),
       vaultCoverImg: computed(() => `url(${props.vaultProp?.img})`),
 
 
       goVaultPage(vaultId) {
         router.push({ name: 'Vault', params: { vaultId: vaultId } });
+      },
+
+      async destroyVault(vaultId) {
+        try {
+          let yes = await Pop.confirm("Are you sure you want to delete this Vault?")
+          if (!yes) {
+            return
+          }
+          await vaultsService.destroyVault(vaultId)
+          Pop.success("Vault deleted")
+        } catch (error) {
+          Pop.error(error)
+        }
       },
 
 
@@ -57,5 +77,11 @@ export default {
 .lock-bg {
   border-radius: 50%;
   width: 25px;
+}
+
+.delete-icon {
+  position: absolute;
+  top: -10%;
+  left: 95%;
 }
 </style>

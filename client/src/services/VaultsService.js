@@ -27,6 +27,23 @@ class VaultsService {
     AppState.myVaults.push(new Vault(res.data))
   }
 
+  async editVault(vaultData) {
+    if (vaultData.isPrivate == null) {
+      vaultData.isPrivate = false
+    }
+    const res = await api.put(`api/vaults/${vaultData.id}`, vaultData)
+    const updatedVault = new Vault(res.data)
+    AppState.activeVault = updatedVault
+    AppState.activeVaultArray.splice(0, 1, updatedVault)
+    //TODO: see the above Todo re: this array
+  }
+
+  async destroyVault(vaultId) {
+    const res = await api.delete(`api/vaults/${vaultId}`)
+    let vaultIndex = AppState.myVaults.findIndex((vault) => vault.id == vaultId)
+    AppState.myVaults.splice(vaultIndex, 1)
+  }
+
   clearVaultData() {
     AppState.activeVault = null;
     AppState.activeVaultArray.length = 0;

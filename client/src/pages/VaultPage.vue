@@ -6,9 +6,16 @@
       </div>
     </section>
     <section class="row justify-content-center mt-3">
-      <div class="col-2 text-center">
+      <div class="col-3"></div>
+      <div class="col-4 text-center d-flex flex-column align-items-center">
         <p>{{ activeVault.description }}</p>
-        <p class="bg-info rounded-pill mx-3">{{ vaultKeeps.length }} {{ keepPluralOrSingular }}</p>
+        <p class="bg-info rounded-pill mx-3 w-25">{{ vaultKeeps.length }} {{ keepPluralOrSingular }}</p>
+      </div>
+      <div class="col-2 d-flex">
+        <p v-if="!wantsToEditVault" class="fs-4 mt-1" @click="flipWantsToEditVault" role="button"><i
+            class="mdi mdi-dots-horizontal text-end" title="Edit Vault Information"></i></p>
+        <button v-else @click="cancelEdits" class="btn btn-danger mt-2 me-3 px-3 py-0 cancel-button">Cancel
+          Edits</button>
       </div>
     </section>
 
@@ -58,6 +65,8 @@ export default {
 
     return {
       vaultKeeps,
+      getVaultById,
+      wantsToEditVault: computed(() => AppState.wantsToEditVault),
       activeKeep: computed(() => AppState.activeKeep),
       activeVault: computed(() => AppState.activeVault),
       activeVaultArray: computed(() => AppState.activeVaultArray),
@@ -67,6 +76,15 @@ export default {
         }
         return "Keeps"
       }),
+
+      flipWantsToEditVault() {
+        AppState.wantsToEditVault = !AppState.wantsToEditVault;
+      },
+
+      cancelEdits() {
+        AppState.wantsToEditVault = false;
+        this.getVaultById();
+      }
 
     }
   },

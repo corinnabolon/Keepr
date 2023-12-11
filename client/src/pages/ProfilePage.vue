@@ -15,13 +15,21 @@
       </div>
     </section>
     <section class="row">
-      <p class="fs-2 fw-bold mb-0 ms-1">Vaults</p>
+      <div class="d-flex align-items-center mt-5">
+        <p v-if="account.id && route.params.profileId == account.id" class="fs-3 mb-0" @click="flipWantsToDeleteVaults"
+          role="button"><i class="mdi mdi-dots-vertical text-end" title="Choose Vaults to Delete"></i></p>
+        <p class="fs-2 fw-bold mb-0 ms-1">Vaults</p>
+      </div>
       <div v-for="vault in vaultsToShow" :key="vault.id" class="col-3">
         <VaultSmallComponent :vaultProp="vault" />
       </div>
     </section>
     <section class="row">
-      <p class="fs-2 fw-bold mt-5 mb-0 ms-1">Keeps</p>
+      <div class="d-flex align-items-center mt-5">
+        <p v-if="account.id && route.params.profileId == account.id" class="fs-3 mb-0" @click="flipWantsToDeleteKeeps"
+          role="button"><i class="mdi mdi-dots-vertical text-end" title="Choose Keeps to Delete"></i></p>
+        <p class="fs-2 fw-bold mb-0 ms-1">Keeps</p>
+      </div>
       <div v-for="keep in profileKeeps" :key="keep.id" class="col-3">
         <KeepSmallComponent :keepProp="keep" />
       </div>
@@ -79,6 +87,7 @@ export default {
 
     return {
       account,
+      route,
       activeProfile: computed(() => AppState.activeProfile),
       profileKeeps: computed(() => AppState.profileKeeps),
       vaultsToShow: computed(() => {
@@ -87,7 +96,15 @@ export default {
         } else {
           return AppState.profileVaults
         }
-      })
+      }),
+
+      flipWantsToDeleteKeeps() {
+        AppState.wantsToDeleteKeeps = !AppState.wantsToDeleteKeeps;
+      },
+
+      flipWantsToDeleteVaults() {
+        AppState.wantsToDeleteVaults = !AppState.wantsToDeleteVaults;
+      }
 
 
     }
