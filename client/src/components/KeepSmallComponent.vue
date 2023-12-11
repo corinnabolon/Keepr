@@ -1,20 +1,15 @@
 <template>
-  <div @click="setActiveKeep(keepProp.id)">
-    <div class="keep-coverImg img-fluid">
+  <div @click="setActiveKeep(keepProp.id)" class="text-center">
+    <div class="keep-coverImg rounded box-shadow mb-4 position-relative" @click="openModal" role="button"
+      :title='`See details of this keep, "${keepProp.name}"`'>
       <img :src="keepProp.img" class="invisible img-fluid">
-    </div>
-    <!-- <div class="keep-coverImg" @click="openModal" role="button" :title='`See details of this keep, "${keepProp.name}"`'> -->
-    <!-- <p v-if="wantsToDeleteKeeps" @click.stop="destroyKeep(keepProp.id)"
-        class="fs-4 text-danger align-self-end delete-icon">
+      <p v-if="wantsToDeleteKeeps" @click.stop="destroyKeep(keepProp.id)" class="fs-4 text-danger delete-icon">
         <i class="mdi mdi-close-circle" title="Delete this Keep"></i>
       </p>
-      <div class="d-flex align-items-center my-2"
-        :class="[route.name == 'Home' ? 'justify-content-around' : 'justify-content-start ms-2']">
-        <p class="mb-0 text-light fw-bold">{{ keepProp.name }}</p>
-        <img v-if="route.name == 'Home'" @click.stop="goProfilePage(keepProp.creatorId)" :src="keepProp.creator.picture"
-          class="user-image rounded-circle" :title="`Go to ${keepProp.creator.name}'s Profile`">
-      </div> -->
-    <!-- </div> -->
+      <p class="mb-0 mt-3 ms-3 text-light fw-bold d-inline-block float-start">{{ keepProp.name }}</p>
+      <img v-if="route.name == 'Home'" @click.stop="goProfilePage(keepProp.creatorId)" :src="keepProp.creator.picture"
+        class="user-image rounded-circle d-inline-block float-right" :title="`Go to ${keepProp.creator.name}'s Profile`">
+    </div>
   </div>
   <KeepDetailsModalComponent />
 </template>
@@ -82,20 +77,19 @@ export default {
 
 <style lang="scss" scoped>
 .keep-coverImg {
-  // position: relative;
+  position: relative;
   background-image: v-bind(keepCoverImg);
-  background-size: 100%;
-  // background-position: center;
+  background-size: cover;
+  background-position: center;
   width: 100%;
-  // height: 20rem;
-  // aspect-ratio: 1/1;
   object-fit: cover;
 }
 
 .user-image {
   height: 8dvh;
   aspect-ratio: 1/1;
-  object-fit: cover;
+  // object-fit: cover;
+  margin-bottom: 10px;
 }
 
 .box-shadow {
@@ -106,5 +100,9 @@ export default {
   position: absolute;
   top: -8%;
   left: 92%;
+}
+
+.hidden {
+  display: none;
 }
 </style>

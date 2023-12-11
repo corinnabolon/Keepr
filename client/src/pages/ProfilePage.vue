@@ -30,8 +30,16 @@
           role="button"><i class="mdi mdi-dots-vertical text-end" title="Choose Keeps to Delete"></i></p>
         <p class="fs-2 fw-bold mb-0 ms-1">Keeps</p>
       </div>
-      <div v-for="keep in profileKeeps" :key="keep.id" class="col-3">
-        <KeepSmallComponent :keepProp="keep" />
+      <div class="col-12">
+        <div class="masonry mt-4">
+
+          <div v-for="keep in profileKeeps" :key="keep.id" class="mx-2">
+            <KeepSmallComponent :keepProp="keep" />
+          </div>
+
+        </div>
+
+
       </div>
     </section>
   </div>
@@ -133,5 +141,9 @@ export default {
 
 .large-margin-top {
   margin-top: 5rem;
+}
+
+.masonry {
+  columns: 18dvw;
 }
 </style>

@@ -2,8 +2,8 @@
   <div class="container">
     <section class="row">
       <div class="col-12">
-        <div class="masonry">
-          <div v-for="keep in keeps" :key="keep.id" class="w-100 mb-2 div-height">
+        <div class="masonry mt-4">
+          <div v-for="keep in keeps" :key="keep.id" class="mx-2">
             <KeepSmallComponent :keepProp="keep" />
           </div>
         </div>
@@ -67,8 +67,7 @@ export default {
 
 <style scoped lang="scss">
 .masonry {
-  columns: 17dvw;
-  height: auto;
+  columns: 18dvw;
 }
 
 .home {
