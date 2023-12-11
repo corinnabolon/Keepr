@@ -1,26 +1,34 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Home</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown"
-        aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-        <ul class="navbar-nav">
-          <li v-if="account.id" class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
-              data-bs-toggle="dropdown" aria-expanded="false">
-              Create
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-              <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#createKeepModal">New Keep</a>
-              </li>
-              <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#createVaultModal">New
-                  Vault</a></li>
-            </ul>
-          </li>
-        </ul>
+  <nav class="navbar navbar-expand-lg bg-theme-beige text-theme-dracula-orchid font-menu box-shadow nav-height">
+    <div class="container-fluid justify-content-between">
+      <div class="d-flex">
+        <a class="navbar-brand bg-theme-pink rounded ms-3 px-3 py-1" href="#">Home</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown"
+          aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div>
+          <ul class="navbar-nav">
+            <li v-if="account.id" class="dropdown font-menu fw-bold">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Create
+              </a>
+              <ul class="dropdown-menu bg-theme-violet" aria-labelledby="navbarDarkDropdownMenuLink">
+                <li><a class="dropdown-item menu-theme font-menu fw-bold" href="#" data-bs-toggle="modal"
+                    data-bs-target="#createKeepModal">New Keep</a>
+                </li>
+                <li><a class="dropdown-item font-menu menu-theme fw-bold" href="#" data-bs-toggle="modal"
+                    data-bs-target="#createVaultModal">New
+                    Vault</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- <div class="collapse navbar-collapse"> -->
+      <div>
+        <img src="../assets/img/Keeprlogo.png" alt="Keepr logo" title="Keepr logo" class="theme-img">
       </div>
       <Login />
     </div>
@@ -87,14 +95,42 @@ a:hover {
   text-decoration: none;
 }
 
-.nav-link {
+.nav-height {
+  height: 15dvh;
+}
+
+
+.menu-theme {
+  background-color: var(--theme-violet);
+  border-bottom: 2px solid var(--theme-violet);
+}
+
+.menu-theme:hover {
+  background-color: var(--theme-violet);
+  border-bottom: 2px solid var(--theme-gray);
+}
+
+/* .menu-theme:focus {
+  background-color: var(--theme-purple);
+} */
+
+
+/* .nav-link {
   text-transform: uppercase;
+} */
+
+.theme-img {
+  height: 56px;
 }
 
 .navbar-nav .router-link-exact-active {
   border-bottom: 2px solid var(--bs-success);
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+}
+
+.box-shadow {
+  box-shadow: 0px 2px 2px var(--theme-violet);
 }
 
 @media screen and (min-width: 768px) {

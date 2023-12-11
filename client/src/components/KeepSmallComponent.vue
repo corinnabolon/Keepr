@@ -7,9 +7,9 @@
         <i class="mdi mdi-close-circle" title="Delete this Keep"></i>
       </p>
       <div class="d-flex align-items-center justify-content-between mt-5 ms-2">
-        <p class="mb-0 text-light fw-bold">{{ keepProp.name }}</p>
+        <p class="mb-0 text-theme-white title-size title-label px-3 mb-2 font-titles fw-bold">{{ keepProp.name }}</p>
         <img v-if="route.name == 'Home'" @click.stop="goProfilePage(keepProp.creatorId)" :src="keepProp.creator.picture"
-          class="user-image rounded-circle me-2" :title="`Go to ${keepProp.creator.name}'s Profile`">
+          class="user-image rounded-circle mx-2 mb-2" :title="`Go to ${keepProp.creator.name}'s Profile`">
       </div>
     </div>
 
@@ -92,17 +92,26 @@ export default {
   height: 8dvh;
   aspect-ratio: 1/1;
   object-fit: cover;
-  margin-bottom: 10px;
 }
 
 .box-shadow {
-  box-shadow: 2px 5px 5px gray;
+  box-shadow: 2px 5px 5px var(--theme-gray);
 }
 
 .delete-icon {
   position: absolute;
   top: -4%;
   left: 94%;
+}
+
+.title-size {
+  font-size: 20px;
+}
+
+.title-label {
+  background-color: #877a8f69;
+  backdrop-filter: blur(13px);
+  border-radius: 25px;
 }
 
 .hidden {

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="activeVault" class="container">
+  <div v-if="activeVault" class="container bg-theme-beige text-theme-charcoal">
     <section class="row justify-content-center">
       <div v-for="vault in activeVaultArray" :key="vault.id" class="col-6">
         <VaultCoverComponent :vaultProp="vault" />

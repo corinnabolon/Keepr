@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container bg-theme-beige text-theme-charcoal">
     <section class="row justify-content-center">
       <div class="col-8 mt-5 position-relative">
         <p class="fs-1 text-center">Welcome, {{ account.name }}!</p>

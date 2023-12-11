@@ -1,5 +1,5 @@
 <template>
-  <div v-if="activeProfile" class="container">
+  <div v-if="activeProfile" class="container bg-theme-beige text-theme-charcoal">
     <section class="row justify-content-center">
       <div class="col-7 mt-5">
         <img :src="activeProfile.coverImg" alt="Profile cover image"

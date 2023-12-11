@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container bg-theme-beige text-theme-charcoal">
     <section class="row">
       <div class="masonry mt-4">
         <!-- <div class="masonry mt-4"> -->
