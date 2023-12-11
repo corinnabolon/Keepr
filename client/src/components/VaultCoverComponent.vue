@@ -5,6 +5,9 @@
     </p>
     <p class="fs-4 text-light fw-bold mb-0">{{ vaultProp.name.toUpperCase() }}</p>
     <p class="text-light fw-bold mb-1">by {{ vaultProp.creator.name }}</p>
+    <div v-if="vaultProp.isPrivate" class="align-self-end bg-light lock-bg m-1 ms-3 pe-4">
+      <i class="fs-4 ms-2 mdi mdi-lock ms-1"></i>
+    </div>
     <form v-if="wantsToEditVault" @submit.prevent="editVault" class="form-position text-light d-flex">
       <div>
         <div class="mb-3 mx-2">
@@ -124,5 +127,10 @@ export default {
   position: absolute;
   top: 10%;
   left: 0%;
+}
+
+.lock-bg {
+  border-radius: 50%;
+  width: 40px;
 }
 </style>

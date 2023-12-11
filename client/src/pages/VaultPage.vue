@@ -5,16 +5,17 @@
         <VaultCoverComponent :vaultProp="vault" />
       </div>
     </section>
-    <section class="row justify-content-center mt-3">
-      <div class="col-3"></div>
-      <div class="col-4 text-center d-flex flex-column align-items-center">
+    <section class="row justify-content-center">
+      <div class="col-2"></div>
+      <div class="col-3 text-center d-flex flex-column align-items-center mt-3">
         <p>{{ activeVault.description }}</p>
         <p class="bg-info rounded-pill mx-3 w-25">{{ vaultKeeps.length }} {{ keepPluralOrSingular }}</p>
       </div>
-      <div class="col-2 d-flex">
-        <p v-if="!wantsToEditVault" class="fs-4 mt-1" @click="flipWantsToEditVault" role="button"><i
-            class="mdi mdi-dots-horizontal text-end" title="Edit Vault Information"></i></p>
-        <button v-else @click="cancelEdits" class="btn btn-danger mt-2 me-3 px-3 py-0 cancel-button">Cancel
+      <div class="col-2">
+        <p class="fs-4 mt-1 ms-5 text-center" :class="[wantsToEditVault ? 'hidden' : '']" @click="flipWantsToEditVault"
+          role="button"><i class="mdi mdi-dots-horizontal text-end" title="Edit Vault Information"></i></p>
+        <button @click="cancelEdits" class="btn btn-danger mt-2 py-0 cancel-button"
+          :class="[wantsToEditVault ? '' : 'hidden']">Cancel
           Edits</button>
       </div>
     </section>
@@ -93,4 +94,12 @@ export default {
 </script>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.cancel-button {
+  height: 2.5rem;
+}
+
+.hidden {
+  display: none;
+}
+</style>
