@@ -1,28 +1,28 @@
 <template>
-  <div class="container bg-theme-beige text-theme-charcoal">
+  <div class="container bg-theme-beige text-theme-charcoal font-menu fs-5">
     <section class="row justify-content-center">
       <div class="col-8 mt-5 position-relative">
         <p class="fs-1 text-center">Welcome, {{ account.name }}!</p>
         <img :src="account.coverImg" alt="Account cover image" title="Your Profile cover image" class="account-coverImg">
-        <form v-if="account.id" @submit.prevent="editAccount" class="form-position text-light"
+        <form v-if="account.id" @submit.prevent="editAccount" class="form-position text-theme-white"
           :class="editingAccountInfo ? 'visible' : 'invisible'">
           <div class="mb-3 mx-4">
             <p class="form-label px-2 py-1 w-25 text-center">Name:</p>
-            <input v-model="editableAccount.name" type="text" class="form-control" id="name" required maxLength="255"
+            <input v-model="editableAccount.name" type="text" class="form-control fs-5" id="name" required maxLength="255"
               minLength="2">
           </div>
           <div class="mb-3 mx-4">
             <p class="form-label ps-4 py-1 w-50">User Picture URL:</p>
-            <input v-model="editableAccount.picture" type="url" class="form-control" id="picture" required
+            <input v-model="editableAccount.picture" type="url" class="form-control fs-5" id="picture" required
               maxLength="1000">
           </div>
           <div class="mb-3 mx-4">
             <p class="form-label ps-4 py-1 w-50">Cover Image URL:</p>
-            <input v-model="editableAccount.coverImg" type="url" class="form-control" id="coverImg" required
+            <input v-model="editableAccount.coverImg" type="url" class="form-control fs-5" id="coverImg" required
               maxLength="1000">
           </div>
           <div class="d-flex">
-            <button class="btn btn-success submit-button" type="submit">Save Changes</button>
+            <button class="btn btn-theme-charcoal submit-button" type="submit">Save Changes</button>
           </div>
         </form>
         <img :src="account.picture" alt="Account picture" title="Your Account picture"
@@ -37,7 +37,7 @@
           <div class="col-3 d-flex justify-content-end">
             <p v-if="!editingAccountInfo" class="fs-4 mt-2" @click="flipWantsToEditAccountInfo" role="button"><i
                 class="mdi mdi-dots-horizontal text-end" title="Edit Account Information"></i></p>
-            <button v-else @click="cancelEdits" class="btn btn-danger mt-2 me-3 px-3 py-0 cancel-button">Cancel
+            <button v-else @click="cancelEdits" class="btn btn-theme-pink mt-2 me-3 px-3 py-0 cancel-button">Cancel
               Edits</button>
           </div>
         </section>

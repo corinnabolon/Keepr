@@ -33,6 +33,7 @@ export default {
 :root {
   --main-height: calc(100vh - 32px - 64px);
   --theme-gray: #919191;
+  --theme-darkgray: #636E72;
   --theme-charcoal: #2D2D2D;
   --theme-dracula-orchid: #2D3436;
   --theme-purple: #877A8F;
@@ -41,7 +42,6 @@ export default {
   --theme-white: #F9F6FA;
   --theme-beige: #FEF6F0;
 }
-
 
 footer {
   display: grid;
@@ -71,8 +71,8 @@ html {
   background-color: var(--theme-purple);
 }
 
-.bg-theme-beige {
-  background-color: var(--theme-beige);
+.bg-theme-gray {
+  background-color: var(--theme-gray);
 }
 
 .text-theme-dracula-orchid {
@@ -83,8 +83,16 @@ html {
   color: var(--theme-white);
 }
 
+.text-theme-purple {
+  color: var(--theme-purple);
+}
+
 .text-theme-gray {
   color: var(--theme-gray);
+}
+
+.text-theme-darkgray {
+  color: var(--theme-darkgray);
 }
 
 .font-descriptions {
@@ -96,6 +104,37 @@ html {
 }
 
 .font-menu {
+  font-family: 'Oxygen', sans-serif;
+}
+
+.font-vault {
+  font-family: 'Quando', serif
+}
+
+.btn-theme-charcoal {
+  background-color: var(--theme-purple);
+  color: var(--theme-white);
+  border: 1px solid var(--theme-violet);
+  font-family: 'Oxygen', sans-serif;
+}
+
+.btn-theme-charcoal:hover {
+  background-color: var(--theme-charcoal);
+  color: var(--theme-white);
+  border: 1px solid var(--theme-violet);
+}
+
+.btn-theme-pink {
+  background-color: var(--theme-violet);
+  color: var(--theme-charcoal);
+  border: 1px solid var(--theme-charcoal);
+  font-family: 'Oxygen', sans-serif;
+}
+
+.btn-theme-pink:hover {
+  background-color: var(--theme-pink);
+  color: var(--theme-charcoal);
+  border: 1px solid var(--theme-charcoal);
   font-family: 'Oxygen', sans-serif;
 }
 

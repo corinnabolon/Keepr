@@ -2,6 +2,7 @@
   <div class="modal fade bg-theme-beige" id="keepDetailsModal" tabindex="-1" aria-labelledby="keepDetailsModal Label">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
+        <!-- //TODO: how do I make my modal longer and thinner? -->
         <!-- <div class="modal-header mb-0 pb-0 d-flex align-items-center">
           <p class="mb-0" :id="modalId + 'Label'">
             Title
@@ -14,18 +15,18 @@
               <img :src="activeKeep.img" alt="Keep picture" :title="activeKeep.name" class="keep-image m-0 p-0 rounded">
             </div>
             <div class="col-6 d-flex flex-column justify-content-between">
-              <div class="d-flex align-self-center mt-2 text-theme-gray">
+              <div class="d-flex align-self-center mt-2 text-theme-gray fs-5">
                 <p class="me-3"><i class="mdi mdi-eye">{{ activeKeep.views }}</i></p>
                 <p><i class="mdi mdi-safe">{{ activeKeep.kept }}</i></p>
               </div>
               <div class="text-center">
-                <p class="fs-4 text-theme-dracula-orchid font-titles">{{ activeKeep.name }}</p>
-                <p class="fs-5 text-theme-gray font-descriptions">{{ activeKeep.description }}</p>
+                <p class="fs-2 text-theme-dracula-orchid font-titles">{{ activeKeep.name }}</p>
+                <p class="fs-5 ms-3 text-start text-theme-gray font-descriptions">{{ activeKeep.description }}</p>
               </div>
-              <div class="d-flex justify-content-between mb-2 align-items-center">
+              <div class="d-flex justify-content-between mb-2 align-items-center font-menu fs-5">
                 <div v-if="account.id && route.name == 'Vault' && activeVault.creatorId == account.id" role="button"
                   @click="removeFromVault(activeKeep.id)">
-                  <p class="mb-0 ms-2"><i class="mdi mdi-cancel"></i>Remove</p>
+                  <p class="mb-0 ms-2 text-theme-purple onhover-underline"><i class="mdi mdi-cancel"></i>Remove</p>
                 </div>
                 <!-- <select v-model="editableVault" class="form-select w-50 me-2 font-menu vault-menu"
                     aria-label="Select Vault" required>
@@ -59,7 +60,7 @@
                   :role="route.name == 'Profile' ? '' : 'button'">
                   <img :src="activeKeep.creator.picture" alt="Keep Creator Picture" :title="`${activeKeep.creator.name}`"
                     class="user-image rounded-circle">
-                  <p class="mb-0 ms-2 align-self-center text-theme-dracula-orchid font-description">{{
+                  <p class="mb-0 ms-2 fw-bold align-self-center text-theme-dracula-orchid font-menu">{{
                     activeKeep.creator.name }}</p>
                 </div>
               </div>
@@ -170,5 +171,9 @@ export default {
   height: 8dvh;
   aspect-ratio: 1/1;
   object-fit: cover;
+}
+
+.text-theme-purple:hover {
+  border-bottom: 1px solid var(--theme-purple);
 }
 </style>

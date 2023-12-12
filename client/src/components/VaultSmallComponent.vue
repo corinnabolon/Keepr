@@ -6,8 +6,10 @@
         class="fs-4 text-danger align-self-end delete-icon">
         <i class="mdi mdi-close-circle" title="Delete this Vault"></i>
       </p>
-      <div class=" d-flex align-items-end justify-content-between my-1">
-        <p class="text-light fw-bold ms-1 mb-1">{{ vaultProp.name.toUpperCase() }}</p>
+      <div class="d-flex align-items-end justify-content-between my-1">
+        <p class="text-theme-white title-label font-vault vault-title fw-bold ms-1 mb-1 px-2">{{
+          vaultProp.name.toUpperCase()
+        }}</p>
         <div v-if="vaultProp.isPrivate" class="bg-light lock-bg m-1">
           <i class="mdi mdi-lock ms-1"></i>
         </div>
@@ -83,5 +85,17 @@ export default {
   position: absolute;
   top: -10%;
   left: 95%;
+}
+
+.vault-title {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 22px;
+}
+
+.title-label {
+  background-color: #877a8f69;
+  backdrop-filter: blur(13px);
+  border-radius: 25px;
 }
 </style>

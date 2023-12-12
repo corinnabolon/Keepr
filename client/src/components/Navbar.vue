@@ -31,6 +31,7 @@
       <!-- <div class="collapse navbar-collapse"> -->
       <div>
         <img src="../assets/img/Keeprlogo.png" alt="Keepr logo" title="Keepr logo" class="theme-img">
+        <!-- //TODO How can I center this logo? -->
       </div>
       <Login />
     </div>

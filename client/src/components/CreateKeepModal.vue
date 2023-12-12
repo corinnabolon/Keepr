@@ -2,26 +2,26 @@
   <div class="modal fade" id="createKeepModal" tabindex="-1" aria-labelledby="createKeepModal Label" aria-hidden="true">
     <div class="modal-dialog modal-md">
       <div class="modal-content">
-        <div class="modal-header mb-0 pb-0 d-flex align-items-center">
-          <p class="mb-0 fs-4" id="createKeepModal Label">Add your keep</p>
+        <div class="modal-header border-0 pb-0 d-flex align-items-center">
+          <p class="mb-0 fw-bold text-theme-darkgray font-menu fs-3" id="createKeepModal Label">Add your keep</p>
           <button type="button" class="btn-close mb-0" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div>
-          <form class="mt-3" @submit.prevent="createKeep">
+          <form class="mt-3 font-descriptions text-theme-gray" @submit.prevent="createKeep">
             <div class="mb-4 mx-4">
-              <input v-model="editableKeep.name" type="text" class="form-control" id="title" placeholder="Title..."
+              <input v-model="editableKeep.name" type="text" class="form-control fs-4" id="title" placeholder="Title..."
                 required maxLength="255" minLength="2">
             </div>
             <div class="mb-4 mx-4">
-              <input v-model="editableKeep.img" type="url" class="form-control" id="title" placeholder="Image URL..."
+              <input v-model="editableKeep.img" type="url" class="form-control fs-4" id="title" placeholder="Image URL..."
                 required maxLength="1000">
             </div>
             <div class="mb-4 mx-4">
-              <textarea v-model="editableKeep.description" required type="text" class="form-control" id="description"
+              <textarea v-model="editableKeep.description" required type="text" class="form-control fs-4" id="description"
                 placeholder="Keep description..." maxLength="1000" minLength="3"></textarea>
             </div>
             <div class="text-end mt-3">
-              <button type="submit" class="btn btn-success me-3 mb-3">Create</button>
+              <button type="submit" class="btn btn-theme-charcoal me-3 mb-3 fs-4">Create</button>
             </div>
           </form>
         </div>
@@ -77,13 +77,13 @@ export default {
 input {
   outline: 0;
   border: 0;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid var(--theme-gray);
 }
 
 textarea {
   outline: 0;
   border: 0;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid var(--theme-gray);
   height: 30dvh;
 }
 </style>

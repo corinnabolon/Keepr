@@ -10,8 +10,8 @@
     </section>
     <section class="row justify-content-center">
       <div class="col-7 text-center large-margin-top">
-        <p class="fs-2">{{ activeProfile.name }}</p>
-        <p>{{ vaultsToShow.length }} Vaults | {{ profileKeeps.length }} Keeps</p>
+        <p class="fs-1 mt-4 fw-bold mb-1 font-menu">{{ activeProfile.name }}</p>
+        <p class="font-menu fs-5">{{ vaultsToShow.length }} Vaults | {{ profileKeeps.length }} Keeps</p>
       </div>
     </section>
     <section class="row">
