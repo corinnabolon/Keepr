@@ -39,5 +39,13 @@ export const router = createRouter({
   linkActiveClass: 'router-link-active',
   linkExactActiveClass: 'router-link-exact-active',
   history: createWebHashHistory(),
-  routes
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (to.hash) {
+      return {
+        el: to.hash,
+        behavior: 'smooth'
+      }
+    }
+  }
 })

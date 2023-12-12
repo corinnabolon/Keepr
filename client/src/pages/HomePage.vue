@@ -1,11 +1,16 @@
 <template>
   <div class="container bg-theme-beige text-theme-charcoal">
     <section class="row">
-      <div class="masonry mt-4">
+      <div v-if="keeps.length" class="masonry mt-4">
         <!-- <div class="masonry mt-4"> -->
         <div v-for="keep in keeps" :key="keep.id" class="col-3 mx-2 basis">
           <KeepSmallComponent :keepProp="keep" />
           <!-- </div> -->
+        </div>
+      </div>
+      <div v-else>
+        <div class="col-12 text-center">
+          <p class="fs-2">Loading... <i class="mdi mdi-loading mdi-spin"></i></p>
         </div>
       </div>
     </section>
@@ -20,6 +25,7 @@ import { keepsService } from "../services/KeepsService.js";
 import KeepSmallComponent from "../components/KeepSmallComponent.vue"
 import { accountService } from "../services/AccountService.js";
 import { vaultsService } from "../services/VaultsService.js";
+import { profilesService } from "../services/ProfilesService.js";
 
 
 export default {
@@ -32,6 +38,7 @@ export default {
     onMounted(() => {
       keepsService.clearKeepData();
       vaultsService.clearVaultData();
+      profilesService.clearData();
       getKeeps();
     })
 

@@ -1,38 +1,47 @@
 <template>
-  <div class="container bg-theme-beige text-theme-charcoal font-menu fs-5">
-    <section class="row justify-content-center">
+  <div v-if="account.id" class="container bg-theme-beige text-theme-charcoal font-menu fs-5">
+    <section class="row justify-content-center large-margin-bottom">
       <div class="col-8 mt-5 position-relative">
         <p class="fs-1 text-center">Welcome, {{ account.name }}!</p>
-        <img :src="account.coverImg" alt="Account cover image" title="Your Profile cover image" class="account-coverImg">
+        <img :src="account.coverImg" alt="Account cover image" title="Your Profile cover image"
+          class="account-coverImg rounded">
         <form v-if="account.id" @submit.prevent="editAccount" class="form-position text-theme-white"
           :class="editingAccountInfo ? 'visible' : 'invisible'">
           <div class="mb-3 mx-4">
             <p class="form-label px-2 py-1 w-25 text-center">Name:</p>
             <input v-model="editableAccount.name" type="text" class="form-control fs-5" id="name" required maxLength="255"
-              minLength="2">
+              minLength="2" title="Your name">
           </div>
           <div class="mb-3 mx-4">
             <p class="form-label ps-4 py-1 w-50">User Picture URL:</p>
             <input v-model="editableAccount.picture" type="url" class="form-control fs-5" id="picture" required
-              maxLength="1000">
+              maxLength="1000" title="Your picture URL">
           </div>
           <div class="mb-3 mx-4">
             <p class="form-label ps-4 py-1 w-50">Cover Image URL:</p>
-            <input v-model="editableAccount.coverImg" type="url" class="form-control fs-5" id="coverImg" required
-              maxLength="1000">
+            <input v-model="editableAccount.coverImg" type="url" class="form-control fs-5" id="coverImg" maxLength="1000"
+              required title="Your cover image URL">
           </div>
           <div class="d-flex">
             <button class="btn btn-theme-charcoal submit-button" type="submit">Save Changes</button>
           </div>
         </form>
         <img :src="account.picture" alt="Account picture" title="Your Account picture"
-          class="account-picture rounded-circle">
+          class="account-picture rounded-circle box-shadow">
       </div>
       <div class="col-8">
         <section class="row">
-          <div class="col-4"></div>
-          <div class="col-5 mt-3">
-            <p class="ms-5 fs-5 mb-5">{{ myVaults.length }} Vaults | {{ myKeeps.length }} Keeps</p>
+          <div class="col-4 mb-5"></div>
+          <div v-if="account.id" class="col-5 mt-3">
+            <p class="ms-5 fs-5 mb-5">
+              <router-link :to="{ name: 'Profile', params: { profileId: account.id, hash: '#vaults' } }">
+                {{ myVaults.length }} Vaults
+              </router-link>
+              |
+              <router-link :to="{ name: 'Profile', params: { profileId: account.id, hash: '#keeps' } }">
+                {{ myKeeps.length }} Keeps
+              </router-link>
+            </p>
           </div>
           <div class="col-3 d-flex justify-content-end">
             <p v-if="!editingAccountInfo" class="fs-4 mt-2" @click="flipWantsToEditAccountInfo" role="button"><i
@@ -48,7 +57,7 @@
         <p>{{ myVaults.length }} Vaults | {{ myKeeps.length }} Keeps</p>
       </div>
     </section> -->
-    <section class="row large-margin-top">
+    <!-- <section class="row large-margin-top">
       <div class="d-flex align-items-center mt-5">
         <p class="fs-3 mb-0" @click="flipWantsToDeleteVaults" role="button"><i class="mdi mdi-dots-vertical text-end"
             title="Choose Vaults to Delete"></i></p>
@@ -68,6 +77,13 @@
         <div v-for="keep in myKeeps" :key="keep.id" class="col-3 mx-2 basis">
           <KeepSmallComponent :keepProp="keep" />
         </div>
+      </div>
+    </section> -->
+  </div>
+  <div v-else class="container">
+    <section class="row justify-content-center">
+      <div class="col-12 text-center">
+        <p class="fs-2">Loading... <i class="mdi mdi-loading mdi-spin"></i></p>
       </div>
     </section>
   </div>
@@ -188,6 +204,10 @@ input {
   margin-right: 2%;
 }
 
+.large-margin-bottom {
+  margin-bottom: 10rem;
+}
+
 .cancel-button {
   height: 2.5rem;
 }
@@ -206,6 +226,11 @@ input {
   object-fit: cover;
   left: 5%;
   top: 83%;
+  border: 4px solid var(--theme-white);
+}
+
+.box-shadow {
+  box-shadow: 2px 3px 5px var(--theme-gray);
 }
 
 .large-margin-top {

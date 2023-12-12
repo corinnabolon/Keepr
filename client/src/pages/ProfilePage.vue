@@ -3,9 +3,9 @@
     <section class="row justify-content-center">
       <div class="col-7 mt-5">
         <img :src="activeProfile.coverImg" alt="Profile cover image"
-          :title="`${activeProfile.name}'s Profile cover image`" class="profile-coverImg">
+          :title="`${activeProfile.name}'s Profile cover image`" class="profile-coverImg rounded">
         <img :src="activeProfile.picture" alt="Profile picture" :title="`${activeProfile.name}'s Profile picture`"
-          class="profile-picture rounded-circle">
+          class="profile-picture rounded-circle box-shadow">
       </div>
     </section>
     <section class="row justify-content-center">
@@ -14,7 +14,7 @@
         <p class="font-menu fs-5">{{ vaultsToShow.length }} Vaults | {{ profileKeeps.length }} Keeps</p>
       </div>
     </section>
-    <section class="row">
+    <section id="vaults" class="row">
       <div class="d-flex align-items-center mt-5">
         <p v-if="account.id && route.params.profileId == account.id" class="fs-3 mb-0" @click="flipWantsToDeleteVaults"
           role="button"><i class="mdi mdi-dots-vertical text-end" title="Choose Vaults to Delete"></i></p>
@@ -24,7 +24,7 @@
         <VaultSmallComponent :vaultProp="vault" />
       </div>
     </section>
-    <section class="row">
+    <section id="keeps" class="row">
       <div class="d-flex align-items-center mt-5">
         <p v-if="account.id && route.params.profileId == account.id" class="fs-3 mb-0" @click="flipWantsToDeleteKeeps"
           role="button"><i class="mdi mdi-dots-vertical text-end" title="Choose Keeps to Delete"></i></p>
@@ -35,9 +35,13 @@
         <div v-for="keep in profileKeeps" :key="keep.id" class="col-3 mx-2 basis">
           <KeepSmallComponent :keepProp="keep" />
         </div>
-
-
-
+      </div>
+    </section>
+  </div>
+  <div v-else class="container">
+    <section class="row justify-content-center">
+      <div class="col-12 text-center">
+        <p class="fs-2">Loading... <i class="mdi mdi-loading mdi-spin"></i></p>
       </div>
     </section>
   </div>
@@ -62,6 +66,7 @@ export default {
   setup() {
     const route = useRoute();
     const account = computed(() => AppState.account);
+    const watchableProfileId = computed(() => route.params.profileId);
 
     onMounted(() => {
       keepsService.clearKeepData();
@@ -69,6 +74,13 @@ export default {
       vaultsService.clearVaultData();
       setActiveProfile();
     })
+
+    watch(watchableProfileId, () => {
+      keepsService.clearKeepData();
+      vaultsService.clearVaultData();
+      profilesService.clearData();
+      setActiveProfile();
+    }, { immediate: true })
 
     watch(account, () => {
       getMyVaults();
@@ -135,7 +147,13 @@ export default {
   object-fit: cover;
   left: 46%;
   top: 67%;
+  border: 4px solid var(--theme-white);
 }
+
+.box-shadow {
+  box-shadow: 2px 3px 5px var(--theme-gray);
+}
+
 
 .large-margin-top {
   margin-top: 5rem;

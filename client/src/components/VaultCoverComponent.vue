@@ -1,45 +1,54 @@
 <template>
-  <div class="vault-coverImg text-center d-flex flex-column justify-content-end position-relative">
+  <div class="vault-coverImg rounded text-center d-flex flex-column justify-content-end position-relative"
+    title="Vault cover image">
     <p v-if="wantsToEditVault" class="fs-2 text-danger align-self-end delete-icon" type="button">
       <i class="mdi mdi-delete" title="Delete this Vault" @click="destroyVault(vaultProp.id)"></i>
     </p>
-    <div class="d-flex flex-column align-items-center justify-content-center my-1">
-      <p class="fs-1 text-theme-white font-vault vault-title title-label fw-bold mb-0 px-3">{{
-        vaultProp.name.toUpperCase() }}</p>
-      <p class="fs-5 text-theme-white font-vault title-label fw-bold mb-1 px-3">by {{ vaultProp.creator.name
-      }}</p>
+    <div class="d-flex" :class="[vaultProp.isPrivate ? 'justify-content-between' : 'justify-content-center']">
+      <p v-if="vaultProp.isPrivate" class="fs-3 invisible">column</p>
+      <div class="d-flex flex-column align-items-center justify-content-center my-1">
+        <p class="fs-1 text-theme-white font-vault vault-title title-label fw-bold mb-0 px-3" title="Vault title">{{
+          vaultProp.name.toUpperCase() }}</p>
+        <p class="fs-5 text-theme-white font-vault title-label fw-bold mb-1 px-3" title="Vault creator name">by {{
+          vaultProp.creator.name
+        }}</p>
+      </div>
+      <div v-if="vaultProp.isPrivate" class="align-self-end bg-light lock-bg m-1 ms-3 pe-4" title="This vault is private">
+        <i class="fs-4 ms-2 mdi mdi-lock ms-1"></i>
+      </div>
+
+
     </div>
-    <div v-if="vaultProp.isPrivate" class="align-self-end bg-light lock-bg m-1 ms-3 pe-4">
-      <i class="fs-4 ms-2 mdi mdi-lock ms-1"></i>
-    </div>
-    <form v-if="wantsToEditVault" @submit.prevent="editVault" class="form-position text-light d-flex">
+    <form v-if="wantsToEditVault" @submit.prevent="editVault" class="form-position text-theme-white d-flex">
       <div>
         <div class="mb-3 mx-2">
           <p class="form-label px-2 py-1 w-25 text-center font-descriptions">Name:</p>
           <input v-model="editableVault.name" type="text" class="form-control fs-5" id="name" required maxLength="255"
-            minLength="2">
+            minLength="2" title="Vault name">
         </div>
         <div class="mb-3 mx-2">
           <p class="form-label py-1 w-50 font-descriptions">Description:</p>
           <textarea v-model="editableVault.description" class="form-control fs-5" id="description" required
-            maxLength="1000" />
+            maxLength="1000" title="Vault description" />
         </div>
       </div>
       <div>
         <div class="mb-3 mx-2">
           <p class="form-label py-1 w-50 font-descriptions">Image URL:</p>
-          <input v-model="editableVault.img" type="url" class="form-control fs-5" id="img" required maxLength="1000">
+          <input v-model="editableVault.img" type="url" class="form-control fs-5" id="img" required maxLength="1000"
+            title="Vault cover image">
         </div>
         <div class="form-check me-2">
           <div class="d-flex justify-content-end align-items-center fs-5">
             <input v-model="editableVault.isPrivate" class="form-check-input mb-3 me-2 fs-4" type="checkbox"
-              value="editableVault.isPrivate" id="flexCheckDefault">
-            <p class="form-label font-menu fs-4">
+              value="editableVault.isPrivate" id="flexCheckDefault" title="Checkbox for making vault private">
+            <p class="form-label font-menu fs-4" title="Checkbox for making vault private">
               Make vault private?
             </p>
           </div>
           <div class="d-flex justify-content-end">
-            <button class="btn btn-theme-charcoal submit-button mt-3" type="submit">Save Changes</button>
+            <button class="btn btn-theme-charcoal submit-button mt-3" type="submit" title="Save changes">Save
+              Changes</button>
           </div>
         </div>
       </div>

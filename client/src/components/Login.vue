@@ -9,7 +9,7 @@
         <div type="button" class="bg-theme-beige border-0 no-select" data-bs-toggle="dropdown" aria-expanded="false">
           <div v-if="account.picture || user.picture">
             <img :src="account.picture || user.picture" alt="account photo" height="40"
-              class="user-image rounded-circle" />
+              class="user-image rounded-circle box-shadow" />
           </div>
         </div>
         <div class="dropdown-menu dropdown-menu-lg-end dropdown-menu-start p-0 fs-5" aria-labelledby="authDropdown">
@@ -17,6 +17,11 @@
             <router-link :to="{ name: 'Account' }">
               <div class="list-group-item dropdown-item list-group-item-action">
                 Manage Account
+              </div>
+            </router-link>
+            <router-link v-if="account.id" :to="{ name: 'Profile', params: { profileId: account.id } }">
+              <div class="list-group-item dropdown-item list-group-item-action">
+                My Profile
               </div>
             </router-link>
             <div class="list-group-item dropdown-item list-group-item-action text-danger selectable" @click="logout">
@@ -55,5 +60,9 @@ export default {
   height: 10dvh;
   aspect-ratio: 1/1;
   object-fit: cover;
+}
+
+.box-shadow {
+  box-shadow: 1px 2px 4px var(--theme-gray);
 }
 </style>
