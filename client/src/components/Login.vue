@@ -12,7 +12,7 @@
               class="user-image rounded-circle box-shadow" />
           </div>
         </div>
-        <div class="dropdown-menu p-0 fs-5" aria-labelledby="authDropdown">
+        <div class="dropdown-menu dropdown-menu-lg-end dropdown-menu-start p-0 fs-5" aria-labelledby="authDropdown">
           <div class="list-group">
             <router-link :to="{ name: 'Account' }">
               <div class="list-group-item dropdown-item list-group-item-action">

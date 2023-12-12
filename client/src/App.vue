@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header class="d-none d-md-block">
     <Navbar />
   </header>
   <main>
@@ -8,6 +8,10 @@
   <KeepDetailsModalComponent />
   <CreateKeepModal />
   <CreateVaultModal />
+
+  <header class="d-md-none sticky-bottom">
+    <Navbar />
+  </header>
 </template>
 
 <script>

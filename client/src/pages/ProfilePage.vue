@@ -52,7 +52,7 @@
 <script>
 import { useRoute } from "vue-router";
 import { AppState } from '../AppState';
-import { computed, reactive, onMounted, watch } from 'vue';
+import { computed, reactive, onMounted, watch, onUnmounted } from 'vue';
 import Pop from "../utils/Pop.js";
 import { profilesService } from "../services/ProfilesService.js";
 import KeepSmallComponent from "../components/KeepSmallComponent.vue"
@@ -73,6 +73,11 @@ export default {
       profilesService.clearData();
       vaultsService.clearVaultData();
       setActiveProfile();
+    })
+
+    onUnmounted(() => {
+      AppState.wantsToDeleteKeeps = false;
+      AppState.wantsToDeleteVaults = false;
     })
 
     watch(watchableProfileId, () => {
