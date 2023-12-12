@@ -2,8 +2,8 @@
   <div v-if="account.id" class="container bg-theme-beige text-theme-charcoal font-menu fs-5">
     <section class="row justify-content-center large-margin-bottom">
       <div class="col-8 mt-5 position-relative">
-        <p class="fs-1 text-center">Welcome, {{ account.name }}!</p>
-        <img :src="account.coverImg" alt="Account cover image" title="Your Profile cover image"
+        <p class="fs-1 text-center text-theme-dracula-orchid font-menu">Welcome, {{ account.name }}!</p>
+        <img v-if="account.coverImg" :src="account.coverImg" alt="Account cover image" title="Your Profile cover image"
           class="account-coverImg rounded">
         <form v-if="account.id" @submit.prevent="editAccount" class="form-position text-theme-white"
           :class="editingAccountInfo ? 'visible' : 'invisible'">
@@ -24,6 +24,8 @@
           </div>
           <div class="d-flex">
             <button class="btn btn-theme-charcoal submit-button" type="submit">Save Changes</button>
+            <button v-if="!account.coverImg" @click="cancelEdits" class="btn btn-theme-pink ms-2 px-3">Cancel
+              Edits</button>
           </div>
         </form>
         <img :src="account.picture" alt="Account picture" title="Your Account picture"
@@ -33,20 +35,25 @@
         <section class="row">
           <div class="col-4 mb-5"></div>
           <div v-if="account.id" class="col-5 mt-3">
-            <p class="ms-5 fs-5 mb-5">
-              <router-link :to="{ name: 'Profile', params: { profileId: account.id, hash: '#vaults' } }">
+            <p class="ms-5 fs-5 mb-5 text-theme-dracula-orchid font-descriptions">
+              <router-link v-if="myVaults && myVaults.length"
+                :to="{ name: 'Profile', params: { profileId: account.id, hash: '#vaults' } }">
                 {{ myVaults.length }} Vaults
               </router-link>
+              <span v-else>0 Vaults</span>
               |
-              <router-link :to="{ name: 'Profile', params: { profileId: account.id, hash: '#keeps' } }">
+              <router-link v-if="myKeeps && myKeeps.length"
+                :to="{ name: 'Profile', params: { profileId: account.id, hash: '#keeps' } }">
                 {{ myKeeps.length }} Keeps
               </router-link>
+              <span v-else>0 Keeps</span>
             </p>
           </div>
           <div class="col-3 d-flex justify-content-end">
             <p v-if="!editingAccountInfo" class="fs-4 mt-2" @click="flipWantsToEditAccountInfo" role="button"><i
                 class="mdi mdi-dots-horizontal text-end" title="Edit Account Information"></i></p>
-            <button v-else @click="cancelEdits" class="btn btn-theme-pink mt-2 me-3 px-3 py-0 cancel-button">Cancel
+            <button v-else @click="cancelEdits" class="btn btn-theme-pink mt-2 me-3 px-3 py-0 cancel-button"
+              :class="[account.coverImg ? '' : 'invisible']">Cancel
               Edits</button>
           </div>
         </section>
@@ -112,12 +119,12 @@ export default {
       keepsService.clearKeepData();
       profilesService.clearData();
       vaultsService.clearVaultData();
-      getMyVaults();
       setActiveProfile();
     })
 
     watch(account, () => {
       editableAccount.value = AppState.account;
+      getMyVaults();
       setActiveProfile();
     })
 

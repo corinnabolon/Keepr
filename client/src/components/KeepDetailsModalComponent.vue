@@ -30,7 +30,7 @@
                       <p class="font-menu vault-menu">{{ vault.name }}</p>
                     </option>
                   </select> -->
-                <div v-else-if="account.id" class="d-flex align-items-center">
+                <div v-else-if="account.id && myVaults.length" class="d-flex align-items-center">
 
                   <ul class="navbar-nav" title="Select from your vaults">
                     <li v-if="account.id" class="dropdown font-menu fw-bold">
@@ -52,6 +52,12 @@
                   <p @click="addToVault(myVaults[0].id, myVaults[0].name)"
                     class="text-theme-white bg-theme-purple fw-bold rounded font-menu ms-3 me-2 py-1 px-3 fs-4 mb-0"
                     title="Select from the menu to the left">save</p>
+                </div>
+                <div v-else-if="account.id && myVaults.length <= 0">
+                  <p class="mb-0">You don't have any vaults</p>
+                  <p>to save this Keep in</p>
+                  <p class="text-theme-dracula-orchid font-description" data-bs-toggle="modal"
+                    data-bs-target="#createVaultModal" role="button">Create a vault!</p>
                 </div>
                 <div v-else-if="!account.id">
                   <p class="mb-0 text-theme-dracula-orchid font-description"><span class="text-info" role="button"

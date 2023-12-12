@@ -14,7 +14,7 @@
         <p class="font-menu fs-5">{{ vaultsToShow.length }} Vaults | {{ profileKeeps.length }} Keeps</p>
       </div>
     </section>
-    <section id="vaults" class="row">
+    <section v-if="vaultsToShow.length > 0" id="vaults" class="row">
       <div class="d-flex align-items-center mt-5">
         <p v-if="account.id && route.params.profileId == account.id" class="fs-3 mb-0" @click="flipWantsToDeleteVaults"
           role="button"><i class="mdi mdi-dots-vertical text-end" title="Choose Vaults to Delete"></i></p>
@@ -24,7 +24,7 @@
         <VaultSmallComponent :vaultProp="vault" />
       </div>
     </section>
-    <section id="keeps" class="row">
+    <section v-if="profileKeeps.length" id="keeps" class="row">
       <div class="d-flex align-items-center mt-5">
         <p v-if="account.id && route.params.profileId == account.id" class="fs-3 mb-0" @click="flipWantsToDeleteKeeps"
           role="button"><i class="mdi mdi-dots-vertical text-end" title="Choose Keeps to Delete"></i></p>
