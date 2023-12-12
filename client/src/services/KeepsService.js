@@ -8,7 +8,6 @@ class KeepsService {
   async getKeeps() {
     const res = await api.get("api/keeps");
     AppState.keeps = res.data.map((pojo) => new Keep(pojo));
-    logger.log(AppState.keeps)
   }
 
   async getKeepByIdAndSetAsActive(keepId) {
@@ -19,7 +18,6 @@ class KeepsService {
 
   async createKeep(keepData, route) {
     const res = await api.post("api/keeps", keepData)
-    logger.log(res.data)
     if (route.name == "Home") {
       AppState.keeps.unshift(new Keep(res.data))
     } else if (route.name == "Account" || route.params.profileId == AppState.account.id) {

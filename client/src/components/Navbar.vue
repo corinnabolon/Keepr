@@ -13,10 +13,10 @@
           <ul class="navbar-nav">
             <li v-if="account.id" class="dropdown font-menu fw-bold fs-4">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
-                data-bs-toggle="dropdown" aria-expanded="false">
+                data-bs-toggle="dropdown">
                 Create
               </a>
-              <ul class="dropdown-menu bg-theme-violet" aria-labelledby="navbarDarkDropdownMenuLink">
+              <ul class="dropdown-menu bg-theme-violet">
                 <li><a class="dropdown-item menu-theme font-menu fw-bold fs-4" href="#" data-bs-toggle="modal"
                     data-bs-target="#createKeepModal">new keep</a>
                 </li>

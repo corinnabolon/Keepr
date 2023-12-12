@@ -35,10 +35,10 @@
                   <ul class="navbar-nav" title="Select from your vaults">
                     <li v-if="account.id" class="dropdown font-menu fw-bold">
                       <a class="nav-link dropdown-toggle font-menu menu-theme fw-bold vault-menu" href="#"
-                        id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown">
                         {{ myVaults[0].name }}
                       </a>
-                      <ul class="dropdown-menu bg-theme-violet" aria-labelledby="navbarDarkDropdownMenuLink">
+                      <ul class="dropdown-menu bg-theme-violet">
                         <li><a class="dropdown-item font-menu menu-theme fw-bold vault-menu" type="submit"
                             v-for=" vault  in  myVaults " :key="vault.id" :value="vault"
                             @click="addToVault(vault.id, vault.name)">
@@ -49,7 +49,10 @@
                       </ul>
                     </li>
                   </ul>
-                  <p @click="addToVault(myVaults[0].id, myVaults[0].name)"
+                  <p v-if="myVaults.length == 1" @click="addToVault(myVaults[0].id, myVaults[0].name)"
+                    class="text-theme-white bg-theme-purple fw-bold rounded font-menu ms-3 me-2 py-1 px-3 fs-md-4 mb-0 invisible-on-mobile"
+                    :title="`Save to ${myVaults[0].name}`" role="button">save</p>
+                  <p v-else
                     class="text-theme-white bg-theme-purple fw-bold rounded font-menu ms-3 me-2 py-1 px-3 fs-md-4 mb-0 invisible-on-mobile"
                     title="Select from the menu to the left">save</p>
                 </div>
@@ -131,14 +134,11 @@ export default {
 
       async addToVault(vaultId, vaultName) {
         try {
-          // const vault = editableVault.value
-          // const vaultId = vault.id
           const routename = route.name
           await vaultKeepsService.addToVault(vaultId, routename);
           Pop.success(`${AppState.activeKeep.name} added to ${vaultName}`)
         } catch (error) {
-          // Pop.error(error);
-          logger.log(error)
+          Pop.error(error);
         }
       },
 

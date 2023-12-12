@@ -40,13 +40,12 @@
           <div v-if="account.id" class="col-7 col-md-5 mt-1 mt-md-3">
             <p class="ms-2 ms-md-5 fs-5 mb-5 text-theme-dracula-orchid font-descriptions">
               <router-link v-if="myVaults && myVaults.length"
-                :to="{ name: 'Profile', params: { profileId: account.id, hash: '#vaults' } }">
+                :to="{ name: 'Profile', params: { profileId: account.id } }">
                 {{ myVaults.length }} Vaults
               </router-link>
               <span v-else>0 Vaults</span>
               |
-              <router-link v-if="myKeeps && myKeeps.length"
-                :to="{ name: 'Profile', params: { profileId: account.id, hash: '#keeps' } }">
+              <router-link v-if="myKeeps && myKeeps.length" :to="{ name: 'Profile', params: { profileId: account.id } }">
                 {{ myKeeps.length }} Keeps
               </router-link>
               <span v-else>0 Keeps</span>
@@ -218,6 +217,7 @@ input {
 .cancel-button {
   height: 2.5rem;
 }
+
 
 .account-coverImg {
   position: relative;
