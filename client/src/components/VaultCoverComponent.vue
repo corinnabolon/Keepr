@@ -22,12 +22,12 @@
     <form v-if="wantsToEditVault" @submit.prevent="editVault" class="form-position text-theme-white d-flex">
       <div>
         <div class="mb-3 mx-2">
-          <p class="form-label px-2 py-1 w-25 text-center font-descriptions">Name:</p>
+          <p class="form-label px-md-2 py-1 w-50 w-md-25 text-center font-descriptions">Name:</p>
           <input v-model="editableVault.name" type="text" class="form-control fs-5" id="name" required maxLength="255"
             minLength="2" title="Vault name">
         </div>
         <div class="mb-3 mx-2">
-          <p class="form-label py-1 w-50 font-descriptions">Description:</p>
+          <p class="form-label py-1 w-75 w-md-50 font-descriptions">Description:</p>
           <textarea v-model="editableVault.description" class="form-control fs-5" id="description" required
             maxLength="1000" title="Vault description" />
         </div>
@@ -46,9 +46,12 @@
               Make vault private?
             </p>
           </div>
-          <div class="d-flex justify-content-end">
-            <button class="btn btn-theme-charcoal submit-button mt-3" type="submit" title="Save changes">Save
+          <div class="d-flex mt-3 justify-content-end">
+            <button class="btn btn-theme-charcoal submit-button" type="submit" title="Save changes">Save
               Changes</button>
+            <button @click="cancelEdits" class="btn btn-theme-pink ms-2 
+             invisible-on-desktop cancel-button" title="Cancel edits">Cancel
+              Edits</button>
           </div>
         </div>
       </div>
@@ -63,20 +66,35 @@ import { computed, reactive, onMounted, ref } from 'vue';
 import { Vault } from "../models/Vault.js";
 import { vaultsService } from "../services/VaultsService.js";
 import Pop from "../utils/Pop.js";
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 
 export default {
   props: { vaultProp: { type: Vault, required: true } },
 
   setup(props) {
+    const route = useRoute();
     let editableVault = ref(AppState.activeVault)
     const router = useRouter();
     const account = computed(() => AppState.account)
+
+    async function getVaultById() {
+      try {
+        const vaultId = route.params.vaultId;
+        await vaultsService.getVaultById(vaultId);
+        await vaultsService.getKeepsInVault(vaultId);
+      } catch (error) {
+        Pop.error(error)
+        if (error.response.data.includes("Something")) {
+          router.push({ name: "Home" })
+        }
+      }
+    }
 
     return {
       editableVault,
       router,
       account,
+      getVaultById,
       wantsToEditVault: computed(() => AppState.wantsToEditVault),
       wantsToEditVault: computed(() => AppState.wantsToEditVault),
       wantsToDeleteVaults: computed(() => AppState.wantsToDeleteVaults),
@@ -107,7 +125,15 @@ export default {
         } catch (error) {
           Pop.error(error)
         }
-      }
+      },
+
+
+      cancelEdits() {
+        AppState.wantsToEditVault = false;
+        this.getVaultById();
+      },
+
+
 
     }
   }
@@ -152,5 +178,17 @@ export default {
   background-color: #877a8f69;
   backdrop-filter: blur(13px);
   border-radius: 25px;
+}
+
+
+@media screen and (max-width: 768px) {
+  .submit-button {
+    margin-left: 37%;
+    height: 4rem;
+  }
+
+  .cancel-button {
+    height: 4rem;
+  }
 }
 </style>

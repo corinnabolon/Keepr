@@ -3,7 +3,7 @@
     <section class="row">
       <div v-if="keeps.length" class="masonry mt-4">
         <!-- <div class="masonry mt-4"> -->
-        <div v-for="keep in keeps" :key="keep.id" class="col-3 mx-2 basis">
+        <div v-for="keep in keeps" :key="keep.id" class="col-6 col-md-3 mx-md-2 basis">
           <KeepSmallComponent :keepProp="keep" />
           <!-- </div> -->
         </div>
@@ -73,17 +73,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.masonry {
-  // columns: 18dvw;
-  column-count: 4;
-}
-
-.basis {
-  display: inline-block;
-  width: 100%;
-}
-
-
 .home {
   display: grid;
   height: 80vh;

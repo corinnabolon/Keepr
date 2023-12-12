@@ -146,4 +146,21 @@ html {
   display: inline-block;
   width: 100%;
 }
+
+@media screen and (max-width: 768px) {
+  .invisible-on-mobile {
+    display: none;
+  }
+
+  .masonry {
+    column-count: 2;
+  }
+}
+
+
+@media screen and (min-width: 768px) {
+  .invisible-on-desktop {
+    display: none;
+  }
+}
 </style>

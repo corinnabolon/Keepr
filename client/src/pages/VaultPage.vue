@@ -1,29 +1,29 @@
 <template>
   <div v-if="activeVault" class="container bg-theme-beige text-theme-charcoal">
     <section class="row justify-content-center">
-      <div v-for="vault in activeVaultArray" :key="vault.id" class="col-6">
+      <div v-for="vault in activeVaultArray" :key="vault.id" class="col-12 col-md-6">
         <VaultCoverComponent :vaultProp="vault" />
       </div>
     </section>
     <section class="row justify-content-center">
-      <div v-if="account.id && account.id == activeVault.creatorId" class="col-2"></div>
-      <div class="col-3 text-description fs-4 text-center d-flex flex-column align-items-center mt-3">
+      <div v-if="account.id && account.id == activeVault.creatorId" class="col-2 invisible-on-mobile"></div>
+      <div class="col-7 col-md-3 text-description fs-4 text-center d-flex flex-column align-items-center mt-3">
         <p title="Vault description">{{ activeVault.description }}</p>
         <p class="text-dracula-orchid bg-theme-violet font-menu rounded mx-3 w-50" title="Number of keeps in this vault">
           {{ vaultKeeps.length }} {{
             keepPluralOrSingular }}</p>
       </div>
-      <div v-if="account.id && account.id == activeVault.creatorId" class="col-2">
+      <div v-if="account.id && account.id == activeVault.creatorId" class="col-1 col-md-2">
         <p class="fs-4 mt-1 ms-5 text-center" :class="[wantsToEditVault ? 'hidden' : '']" @click="flipWantsToEditVault"
           role="button"><i class="mdi mdi-dots-horizontal text-end" title="Edit Vault Information"></i></p>
-        <button @click="cancelEdits" class="btn btn-theme-pink mt-2 py-0 cancel-button"
+        <button @click="cancelEdits" class="btn btn-theme-pink mt-2 py-0 cancel-button invisible-on-mobile"
           :class="[wantsToEditVault ? '' : 'hidden']" title="Cancel edits">Cancel
           Edits</button>
       </div>
     </section>
     <section class="row justify-content-center">
       <div class="masonry mt-4">
-        <div v-for="keep in vaultKeeps" :key="keep.id" class="col-3 mx-2 basis">
+        <div v-for="keep in vaultKeeps" :key="keep.id" class="col-6 col-md-3 mx-md-2 basis">
           <KeepSmallComponent :keepProp="keep" />
         </div>
       </div>

@@ -1,41 +1,44 @@
 <template>
   <div v-if="account.id" class="container bg-theme-beige text-theme-charcoal font-menu fs-5">
     <section class="row justify-content-center large-margin-bottom">
-      <div class="col-8 mt-5 position-relative">
+      <div class="col-12 col-md-8 mt-5 position-relative">
         <p class="fs-1 text-center text-theme-dracula-orchid font-menu">Welcome, {{ account.name }}!</p>
         <img v-if="account.coverImg" :src="account.coverImg" alt="Account cover image" title="Your Profile cover image"
           class="account-coverImg rounded">
         <form v-if="account.id" @submit.prevent="editAccount" class="form-position text-theme-white"
           :class="editingAccountInfo ? 'visible' : 'invisible'">
           <div class="mb-3 mx-4">
-            <p class="form-label px-2 py-1 w-25 text-center">Name:</p>
+            <p class="form-label ps-1 px-md-2 py-1 w-25 text-md-center">Name:</p>
             <input v-model="editableAccount.name" type="text" class="form-control fs-5" id="name" required maxLength="255"
               minLength="2" title="Your name">
           </div>
           <div class="mb-3 mx-4">
-            <p class="form-label ps-4 py-1 w-50">User Picture URL:</p>
+            <p class="form-label ps-1 ps-md-4 py-1 w-75 w-md-50">User Picture URL:</p>
             <input v-model="editableAccount.picture" type="url" class="form-control fs-5" id="picture" required
               maxLength="1000" title="Your picture URL">
           </div>
           <div class="mb-3 mx-4">
-            <p class="form-label ps-4 py-1 w-50">Cover Image URL:</p>
+            <p class="form-label ps-1 ps-md-4 py-1 w-75 w-md-50">Cover Image URL:</p>
             <input v-model="editableAccount.coverImg" type="url" class="form-control fs-5" id="coverImg" maxLength="1000"
               required title="Your cover image URL">
           </div>
-          <div class="d-flex">
+          <div class="d-flex mb-3">
             <button class="btn btn-theme-charcoal submit-button" type="submit">Save Changes</button>
-            <button v-if="!account.coverImg" @click="cancelEdits" class="btn btn-theme-pink ms-2 px-3">Cancel
+            <button @click="cancelEdits" class="btn btn-theme-pink ms-3 cancel-button invisible-on-desktop">Cancel
+              Edits</button>
+            <button v-if="!account.coverImg" @click="cancelEdits"
+              class="btn btn-theme-pink ms-2 px-3 cancel-button invisible-on-mobile">Cancel
               Edits</button>
           </div>
         </form>
         <img :src="account.picture" alt="Account picture" title="Your Account picture"
           class="account-picture rounded-circle box-shadow">
       </div>
-      <div class="col-8">
+      <div class="col-12 col-md-8">
         <section class="row">
           <div class="col-4 mb-5"></div>
-          <div v-if="account.id" class="col-5 mt-3">
-            <p class="ms-5 fs-5 mb-5 text-theme-dracula-orchid font-descriptions">
+          <div v-if="account.id" class="col-7 col-md-5 mt-1 mt-md-3">
+            <p class="ms-2 ms-md-5 fs-5 mb-5 text-theme-dracula-orchid font-descriptions">
               <router-link v-if="myVaults && myVaults.length"
                 :to="{ name: 'Profile', params: { profileId: account.id, hash: '#vaults' } }">
                 {{ myVaults.length }} Vaults
@@ -49,10 +52,11 @@
               <span v-else>0 Keeps</span>
             </p>
           </div>
-          <div class="col-3 d-flex justify-content-end">
-            <p v-if="!editingAccountInfo" class="fs-4 mt-2" @click="flipWantsToEditAccountInfo" role="button"><i
+          <div class="col-1 col-md-3 d-flex justify-content-end">
+            <p v-if="!editingAccountInfo" class="fs-4 mt-1 mt-md-2" @click="flipWantsToEditAccountInfo" role="button"><i
                 class="mdi mdi-dots-horizontal text-end" title="Edit Account Information"></i></p>
-            <button v-else @click="cancelEdits" class="btn btn-theme-pink mt-2 me-3 px-3 py-0 cancel-button"
+            <button v-else @click="cancelEdits"
+              class="btn btn-theme-pink mt-2 me-3 px-3 py-0 cancel-button invisible-on-mobile"
               :class="[account.coverImg ? '' : 'invisible']">Cancel
               Edits</button>
           </div>
@@ -151,7 +155,6 @@ export default {
       editableAccount,
       myVaults: computed(() => AppState.myVaults),
       myKeeps: computed(() => AppState.profileKeeps),
-      //TODO: make sure keeps would be added on this page if you added one from Navbar--also with profile page
 
       flipWantsToEditAccountInfo() {
         editingAccountInfo.value = true;
@@ -170,6 +173,7 @@ export default {
           Pop.error(error)
         }
       },
+
 
       async editAccount() {
         try {
@@ -211,10 +215,6 @@ input {
   margin-right: 2%;
 }
 
-.large-margin-bottom {
-  margin-bottom: 10rem;
-}
-
 .cancel-button {
   height: 2.5rem;
 }
@@ -244,9 +244,56 @@ input {
   margin-top: 5rem;
 }
 
+
+.large-margin-bottom {
+  margin-bottom: 10rem;
+}
+
 .form-position {
   position: absolute;
   top: 21%;
   left: 40%;
+}
+
+@media screen and (max-width: 768px) {
+  .account-picture {
+    height: 16dvh;
+    left: 6%;
+    top: 78%;
+  }
+
+  .large-margin-top {
+    margin-top: 3rem;
+  }
+
+  .large-margin-bottom {
+    margin-bottom: 2rem;
+  }
+
+  .form-position {
+    top: 350px;
+    left: 0px;
+  }
+
+  input {
+    width: 320px;
+  }
+
+  .form-label {
+    /* background-color: rgba(82, 69, 69, 0.565);
+    backdrop-filter: blur(13px);
+    font-weight: bold; */
+    color: var(--theme-dracula-orchid);
+    /* border-radius: 25px; */
+  }
+
+  .submit-button {
+    margin-left: 37%;
+    height: 4rem;
+  }
+
+  .cancel-button {
+    height: 4rem;
+  }
 }
 </style>

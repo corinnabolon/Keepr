@@ -74,7 +74,6 @@ public class VaultsService
       return filteredVaults;
     }
     return vaults;
-    //TODO: Check on this--unreachable code?
   }
 
   internal List<Vault> GetMyVaults(string userId)

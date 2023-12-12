@@ -98,4 +98,17 @@ export default {
   backdrop-filter: blur(13px);
   border-radius: 25px;
 }
+
+
+
+@media screen and (max-width: 768px) {
+  .vault-coverImg {
+    height: 14dvh;
+  }
+
+  .vault-title {
+    letter-spacing: 1px;
+    font-size: 14px;
+  }
+}
 </style>

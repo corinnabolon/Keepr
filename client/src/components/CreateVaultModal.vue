@@ -21,7 +21,7 @@
                 id="description" placeholder="Vault description..." maxLength="1000" minLength="3"></textarea>
             </div>
             <div class="form-check text-end me-2">
-              <div class="form-text fs-5">Private vaults can only be seen by you.</div>
+              <div class="form-text fs-md-5">Private vaults can only be seen by you.</div>
               <div class="d-flex justify-content-end align-items-center">
                 <input v-model="editableVault.isPrivate" class="form-check-input me-2 fs-4" type="checkbox"
                   value="editableVault.isPrivate" id="flexCheckDefault">

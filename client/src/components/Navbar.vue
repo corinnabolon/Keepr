@@ -1,14 +1,14 @@
 <template>
   <nav class="navbar navbar-expand-lg bg-theme-beige text-theme-dracula-orchid font-menu box-shadow nav-height">
     <div class="container-fluid justify-content-between">
-      <div class="d-flex">
-        <a class="navbar-brand bg-theme-pink home rounded mt-1 ms-3 px-3 py-1 fs-4" href="#">
+      <div class="d-flex order-2 order-md-1">
+        <a class="invisible-on-mobile navbar-brand bg-theme-pink home rounded mt-1 ms-3 px-3 py-1 fs-4" href="#">
           <p class="mb-0">Home</p>
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown"
+        <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown"
           aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
-        </button>
+        </button> -->
         <div>
           <ul class="navbar-nav">
             <li v-if="account.id" class="dropdown font-menu fw-bold fs-4">
@@ -29,11 +29,14 @@
         </div>
       </div>
       <!-- <div class="collapse navbar-collapse"> -->
-      <div>
-        <img src="../assets/img/Keeprlogo.png" alt="Keepr logo" title="Keepr logo" class="theme-img">
-        <!-- //TODO How can I center this logo? -->
+      <div class="order-1 order-md-2">
+        <router-link :to="{ name: 'Home' }">
+          <img src="../assets/img/Keeprlogo.png" alt="Keepr logo" title="Keepr logo" class="theme-img">
+        </router-link>
       </div>
-      <Login />
+      <div class="order-3">
+        <Login />
+      </div>
     </div>
   </nav>
   <!-- <nav class="navbar navbar-expand-sm navbar-dark bg-dark px-3">
@@ -143,6 +146,12 @@ a:hover {
 @media screen and (min-width: 768px) {
   nav {
     height: 64px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .invisible-on-mobile {
+    display: none;
   }
 }
 </style>

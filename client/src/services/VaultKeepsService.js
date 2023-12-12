@@ -18,7 +18,6 @@ class VaultKeepsService {
     }
     vaultKeepData.vaultId = vaultId
     vaultKeepData.keepId = vaultKeepData.id
-    //TODO: check all account's current vaultkeeps to make sure not duplicating--back end won't allow it--or get rid of "unique" on the back end OR figure out how to throw better error message
     const res = await api.post("api/vaultkeeps", vaultKeepData)
     vaultKeepData.vaultKeepId = res.data.id
     const newVaultKeep = new KeepInVault(vaultKeepData)

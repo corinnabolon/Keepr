@@ -9,7 +9,6 @@ class KeepsService {
     const res = await api.get("api/keeps");
     AppState.keeps = res.data.map((pojo) => new Keep(pojo));
     logger.log(AppState.keeps)
-    //TODO: ask re the order they are coming in
   }
 
   async getKeepByIdAndSetAsActive(keepId) {

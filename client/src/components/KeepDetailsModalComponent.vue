@@ -4,11 +4,11 @@
       <div class="modal-content">
         <div class="container">
           <section v-if="activeKeep" class="row">
-            <div class="col-6 mx-0 px-0">
+            <div class="col-12 col-md-6 mx-0 px-0">
               <img :src="activeKeep.img" alt="Keep picture" :title="activeKeep.name"
                 class="keep-image rounded-start m-0 p-0">
             </div>
-            <div class="col-6 d-flex flex-column justify-content-between">
+            <div class="col-12 col-md-6 d-flex flex-column justify-content-between">
               <div class="d-flex align-self-center mt-2 text-theme-gray fs-5">
                 <p class="me-3" :title="`${activeKeep.views} views`"><i class="mdi mdi-eye">{{ activeKeep.views }}</i></p>
                 <p :title="[activeKeep.kept == 1 ? `kept ${activeKeep.kept} time` : `kept ${activeKeep.kept} times`]"><i
@@ -50,7 +50,7 @@
                     </li>
                   </ul>
                   <p @click="addToVault(myVaults[0].id, myVaults[0].name)"
-                    class="text-theme-white bg-theme-purple fw-bold rounded font-menu ms-3 me-2 py-1 px-3 fs-4 mb-0"
+                    class="text-theme-white bg-theme-purple fw-bold rounded font-menu ms-3 me-2 py-1 px-3 fs-md-4 mb-0 invisible-on-mobile"
                     title="Select from the menu to the left">save</p>
                 </div>
                 <div v-else-if="account.id && myVaults.length <= 0">

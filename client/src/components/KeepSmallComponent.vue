@@ -6,10 +6,11 @@
       <p v-if="wantsToDeleteKeeps" @click.stop="destroyKeep(keepProp.id)" class="fs-4 text-danger delete-icon">
         <i class="mdi mdi-close-circle" title="Delete this Keep"></i>
       </p>
-      <div class="d-flex align-items-center justify-content-between mt-5 ms-2">
-        <p class="mb-0 text-theme-white title-size title-label px-3 mb-2 font-titles fw-bold">{{ keepProp.name }}</p>
+      <div class="d-flex align-items-center justify-content-evenly justify-content-md-between mt-5 ms-1 ms-md-2">
+        <p class="mb-0 text-theme-white title-size title-label px-1 px-md-3 mb-2 font-titles fw-bold">{{ keepProp.name }}
+        </p>
         <img v-if="route.name == 'Home'" @click.stop="goProfilePage(keepProp.creatorId)" :src="keepProp.creator.picture"
-          class="user-image rounded-circle mx-2 mb-2" :title="`Go to ${keepProp.creator.name}'s Profile`">
+          class="user-image rounded-circle ms-1 mx-md-2 mb-2" :title="`Go to ${keepProp.creator.name}'s Profile`">
       </div>
     </div>
 
@@ -116,5 +117,17 @@ export default {
 
 .hidden {
   display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .title-size {
+    font-size: 16px;
+  }
+
+  .user-image {
+    height: 6dvh;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+  }
 }
 </style>
