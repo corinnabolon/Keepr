@@ -2,10 +2,8 @@
   <div class="container bg-theme-beige text-theme-charcoal">
     <section class="row">
       <div v-if="keeps.length" class="masonry mt-4">
-        <!-- <div class="masonry mt-4"> -->
         <div v-for="keep in keeps" :key="keep.id" class="col-6 col-md-3 mx-md-2 basis">
           <KeepSmallComponent :keepProp="keep" />
-          <!-- </div> -->
         </div>
       </div>
       <div v-else>
@@ -22,8 +20,7 @@ import { computed, onMounted, watch } from 'vue';
 import { AppState } from '../AppState';
 import Pop from '../utils/Pop';
 import { keepsService } from "../services/KeepsService.js";
-import KeepSmallComponent from "../components/KeepSmallComponent.vue"
-import { accountService } from "../services/AccountService.js";
+import KeepSmallComponent from "../components/KeepSmallComponent.vue";
 import { vaultsService } from "../services/VaultsService.js";
 import { profilesService } from "../services/ProfilesService.js";
 
@@ -42,10 +39,6 @@ export default {
       getKeeps();
     })
 
-    // watch(account, () => {
-    //   getMyVaults();
-    // })
-
     async function getKeeps() {
       try {
         await keepsService.getKeeps();
@@ -53,14 +46,6 @@ export default {
         Pop.error(error);
       }
     }
-
-    // async function getMyVaults() {
-    //   try {
-    //     await accountService.getMyVaults();
-    //   } catch (error) {
-    //     Pop.error(error);
-    //   }
-    // }
 
     return {
       account,

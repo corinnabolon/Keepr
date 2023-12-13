@@ -24,11 +24,6 @@
           </div>
           <div class="d-flex mb-3">
             <button class="btn btn-theme-charcoal submit-button" type="submit">Save Changes</button>
-            <button @click="cancelEdits" class="btn btn-theme-pink ms-3 cancel-button invisible-on-desktop">Cancel
-              Edits</button>
-            <button v-if="!account.coverImg" @click="cancelEdits"
-              class="btn btn-theme-pink ms-2 px-3 cancel-button invisible-on-mobile">Cancel
-              Edits</button>
           </div>
         </form>
         <img :src="account.picture" alt="Account picture" title="Your Account picture"
@@ -52,44 +47,17 @@
               <span v-else>0 Keeps</span>
             </p>
           </div>
-          <div class="col-1 col-md-3 d-flex justify-content-end">
+          <div class="col-1 col-md-3 d-flex justify-content-end position-relative">
             <p v-if="!editingAccountInfo" class="fs-4 mt-1 mt-md-2" @click="flipWantsToEditAccountInfo" role="button"><i
                 class="mdi mdi-dots-horizontal text-end" title="Edit Account Information"></i></p>
             <button v-else @click="cancelEdits"
-              class="btn btn-theme-pink mt-2 me-3 px-3 py-0 cancel-button invisible-on-mobile"
+              class="btn btn-theme-pink mt-2 me-3 px-3 py-0 cancel-button mobile-cancel-button"
               :class="[account.coverImg ? '' : 'invisible']">Cancel
               Edits</button>
           </div>
         </section>
       </div>
     </section>
-    <!-- <section class="row justify-content-center">
-      <div class="col-7 text-center large-margin-top">
-        <p>{{ myVaults.length }} Vaults | {{ myKeeps.length }} Keeps</p>
-      </div>
-    </section> -->
-    <!-- <section class="row large-margin-top">
-      <div class="d-flex align-items-center mt-5">
-        <p class="fs-3 mb-0" @click="flipWantsToDeleteVaults" role="button"><i class="mdi mdi-dots-vertical text-end"
-            title="Choose Vaults to Delete"></i></p>
-        <p class="fs-2 fw-bold mb-0 ms-1">Vaults</p>
-      </div>
-      <div v-for="vault in myVaults" :key="vault.id" class="col-3">
-        <VaultSmallComponent :vaultProp="vault" />
-      </div>
-    </section>
-    <section class="row">
-      <div class="d-flex align-items-center mt-5">
-        <p class="fs-3 mb-0" @click="flipWantsToDeleteKeeps" role="button"><i class="mdi mdi-dots-vertical text-end"
-            title="Choose Keeps to Delete"></i></p>
-        <p class="fs-2 fw-bold mb-0 ms-1">Keeps</p>
-      </div>
-      <div class="masonry mt-4">
-        <div v-for="keep in myKeeps" :key="keep.id" class="col-3 mx-2 basis">
-          <KeepSmallComponent :keepProp="keep" />
-        </div>
-      </div>
-    </section> -->
   </div>
   <div v-else class="container">
     <section class="row justify-content-center">
@@ -104,9 +72,9 @@
 <script>
 import { computed, onMounted, ref, watch } from 'vue';
 import { AppState } from '../AppState';
-import KeepSmallComponent from "../components/KeepSmallComponent.vue"
-import VaultSmallComponent from "../components/VaultSmallComponent.vue"
-import KeepDetailsModalComponent from "../components/KeepDetailsModalComponent.vue"
+import KeepSmallComponent from "../components/KeepSmallComponent.vue";
+import VaultSmallComponent from "../components/VaultSmallComponent.vue";
+import KeepDetailsModalComponent from "../components/KeepDetailsModalComponent.vue";
 import { keepsService } from "../services/KeepsService.js";
 import { accountService } from "../services/AccountService.js";
 import { vaultsService } from "../services/VaultsService.js";
@@ -136,6 +104,9 @@ export default {
       try {
         const profileId = AppState.account.id
         await profilesService.setActiveProfile(profileId);
+        if (AppState.account.coverImg == null) {
+          accountService.getAccount()
+        }
       } catch (error) {
         Pop.error(error);
       }
@@ -219,6 +190,11 @@ input {
   height: 2.5rem;
 }
 
+.mobile-cancel-button {
+  position: absolute;
+  top: 50%;
+}
+
 
 .account-coverImg {
   position: relative;
@@ -281,11 +257,7 @@ input {
   }
 
   .form-label {
-    /* background-color: rgba(82, 69, 69, 0.565);
-    backdrop-filter: blur(13px);
-    font-weight: bold; */
     color: var(--theme-dracula-orchid);
-    /* border-radius: 25px; */
   }
 
   .submit-button {

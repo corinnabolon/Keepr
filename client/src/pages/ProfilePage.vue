@@ -52,12 +52,12 @@
 <script>
 import { useRoute } from "vue-router";
 import { AppState } from '../AppState';
-import { computed, reactive, onMounted, watch, onUnmounted } from 'vue';
+import { computed, onMounted, watch, onUnmounted } from 'vue';
 import Pop from "../utils/Pop.js";
 import { profilesService } from "../services/ProfilesService.js";
-import KeepSmallComponent from "../components/KeepSmallComponent.vue"
-import VaultSmallComponent from "../components/VaultSmallComponent.vue"
-import KeepDetailsModalComponent from "../components/KeepDetailsModalComponent.vue"
+import KeepSmallComponent from "../components/KeepSmallComponent.vue";
+import VaultSmallComponent from "../components/VaultSmallComponent.vue";
+import KeepDetailsModalComponent from "../components/KeepDetailsModalComponent.vue";
 import { keepsService } from "../services/KeepsService.js";
 import { accountService } from "../services/AccountService.js";
 import { vaultsService } from "../services/VaultsService.js";

@@ -1,5 +1,8 @@
 <template>
-  <header class="d-none d-md-block">
+  <!-- <header class="d-none d-md-block">
+    <Navbar />
+  </header> -->
+  <header>
     <Navbar />
   </header>
   <main>
@@ -9,9 +12,9 @@
   <CreateKeepModal />
   <CreateVaultModal />
 
-  <header class="d-md-none sticky-bottom">
+  <!-- <header class="d-md-none sticky-bottom">
     <Navbar />
-  </header>
+  </header> -->
 </template>
 
 <script>

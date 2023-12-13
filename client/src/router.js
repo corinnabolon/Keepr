@@ -50,7 +50,7 @@ export const router = createRouter({
             top: -10,
             behavior: 'smooth'
           })
-        }, 1500)
+        }, 800)
       })
     }
   }

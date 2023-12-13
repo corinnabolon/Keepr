@@ -4,7 +4,9 @@
       <div class="modal-content">
         <div class="container">
           <section v-if="activeKeep" class="row">
-            <div class="col-12 col-md-6 mx-0 px-0">
+            <div class="col-12 col-md-6 mx-0 px-0 position-relative">
+              <button type="button" class="bg-danger btn-close mb-0 invisible-on-desktop close-position"
+                data-bs-dismiss="modal" aria-label="Close" title="Close Keep display"></button>
               <img :src="activeKeep.img" alt="Keep picture" :title="activeKeep.name"
                 class="keep-image rounded-start m-0 p-0">
             </div>
@@ -24,12 +26,6 @@
                   @click="removeFromVault(activeKeep.id)">
                   <p class="mb-0 ms-2 text-theme-purple onhover-underline"><i class="mdi mdi-cancel"></i>Remove</p>
                 </div>
-                <!-- <select v-model="editableVault" class="form-select w-50 me-2 font-menu vault-menu"
-                    aria-label="Select Vault" required>
-                    <option v-for=" vault  in  myVaults " :key="vault.id" :value="vault">
-                      <p class="font-menu vault-menu">{{ vault.name }}</p>
-                    </option>
-                  </select> -->
                 <div v-else-if="account.id && myVaults.length" class="d-flex align-items-center">
 
                   <ul class="navbar-nav" title="Select from your vaults">
@@ -98,7 +94,6 @@ import { Modal } from "bootstrap";
 import { accountService } from "../services/AccountService.js";
 import { useRoute, useRouter } from "vue-router";
 import { AuthService } from '../services/AuthService'
-import { logger } from "../utils/Logger.js";
 
 export default {
 
@@ -205,10 +200,9 @@ export default {
   --bs-modal-width: 1200px !important;
 }
 
-
-//for screen sizes larger than the specified max-width--so the below is for very large screens
-// @media screen and (min-width: 1800px) {
-
-
-// }
+.close-position {
+  position: absolute;
+  bottom: 95%;
+  right: 3%;
+}
 </style>

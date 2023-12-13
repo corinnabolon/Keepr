@@ -27,7 +27,7 @@ import Pop from '../utils/Pop';
 import { keepsService } from "../services/KeepsService.js";
 import { Modal } from "bootstrap";
 import { useRouter, useRoute } from "vue-router";
-import KeepDetailsModalComponent from "../components/KeepDetailsModalComponent.vue"
+import KeepDetailsModalComponent from "../components/KeepDetailsModalComponent.vue";
 
 export default {
   props: { keepProp: { type: Keep, required: true } },

@@ -36,12 +36,17 @@
 </template>
 
 <script>
-import { computed } from 'vue'
-import { AppState } from '../AppState'
-import { AuthService } from '../services/AuthService'
+import { computed } from 'vue';
+import { AppState } from '../AppState';
+import { AuthService } from '../services/AuthService';
+import { useRouter } from "vue-router";
+
 export default {
   setup() {
+    const router = useRouter();
+
     return {
+      router,
       user: computed(() => AppState.user),
       account: computed(() => AppState.account),
       async login() {

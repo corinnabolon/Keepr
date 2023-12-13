@@ -21,7 +21,7 @@
 
 <script>
 import { AppState } from '../AppState';
-import { computed, reactive, onMounted } from 'vue';
+import { computed } from 'vue';
 import { Vault } from "../models/Vault.js";
 import { useRouter } from "vue-router";
 import Pop from "../utils/Pop.js";

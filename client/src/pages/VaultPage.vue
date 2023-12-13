@@ -41,12 +41,12 @@
 
 <script>
 import { AppState } from '../AppState';
-import { computed, reactive, onMounted, watch, ref } from 'vue';
+import { computed, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import Pop from "../utils/Pop.js";
 import { vaultsService } from "../services/VaultsService.js";
-import VaultCoverComponent from "../components/VaultCoverComponent.vue"
-import KeepSmallComponent from "../components/KeepSmallComponent.vue"
+import VaultCoverComponent from "../components/VaultCoverComponent.vue";
+import KeepSmallComponent from "../components/KeepSmallComponent.vue";
 import { keepsService } from "../services/KeepsService.js";
 import { profilesService } from "../services/ProfilesService.js";
 

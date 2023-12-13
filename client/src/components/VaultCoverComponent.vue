@@ -16,8 +16,6 @@
       <div v-if="vaultProp.isPrivate" class="align-self-end bg-light lock-bg m-1 ms-3 pe-4" title="This vault is private">
         <i class="fs-4 ms-2 mdi mdi-lock ms-1"></i>
       </div>
-
-
     </div>
     <form v-if="wantsToEditVault" @submit.prevent="editVault" class="form-position text-theme-white d-flex">
       <div>
@@ -62,7 +60,7 @@
 
 <script>
 import { AppState } from '../AppState';
-import { computed, reactive, onMounted, ref } from 'vue';
+import { computed, ref } from 'vue';
 import { Vault } from "../models/Vault.js";
 import { vaultsService } from "../services/VaultsService.js";
 import Pop from "../utils/Pop.js";
