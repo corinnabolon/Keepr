@@ -1,7 +1,7 @@
 <template>
-  <div v-if="activeProfile" class="container bg-theme-beige text-theme-charcoal">
+  <div v-if="activeProfile" class="container my-5 bg-theme-beige text-theme-charcoal mb-4 mt-5">
     <section class="row justify-content-center">
-      <div class="col-12 col-md-7 mt-5">
+      <div class="col-12 col-md-6 col-lg-8">
         <img :src="activeProfile.coverImg" alt="Profile cover image"
           :title="`${activeProfile.name}'s Profile cover image`" class="profile-coverImg rounded">
         <img :src="activeProfile.picture" alt="Profile picture" :title="`${activeProfile.name}'s Profile picture`"
@@ -20,7 +20,7 @@
           role="button"><i class="mdi mdi-dots-vertical text-end" title="Choose Vaults to Delete"></i></p>
         <p class="fs-2 fw-bold mb-0 ms-1">Vaults</p>
       </div>
-      <div v-for="vault in vaultsToShow" :key="vault.id" class="col-6 col-md-3">
+      <div v-for="vault in vaultsToShow" :key="vault.id" class="col-6 col-md-4">
         <VaultSmallComponent :vaultProp="vault" />
       </div>
     </section>
@@ -151,7 +151,7 @@ export default {
   aspect-ratio: 1/1;
   object-fit: cover;
   left: 46%;
-  top: 67%;
+  top: 71%;
   border: 4px solid var(--theme-white);
 }
 
@@ -169,6 +169,21 @@ export default {
     height: 16dvh;
     left: 36%;
     top: 42%;
+  }
+}
+
+@media screen and (min-width: 1800px) {
+  .profile-picture {
+    height: 20dvh;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    left: 45.5%;
+    top: 46%;
+    border: 4px solid var(--theme-white);
+  }
+
+  .large-margin-top {
+    margin-top: 7rem;
   }
 }
 </style>

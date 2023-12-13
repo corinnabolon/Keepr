@@ -68,7 +68,7 @@ export default {
   background-image: v-bind(vaultCoverImg);
   background-size: cover;
   background-position: center;
-  height: 25dvh;
+  height: 32dvh;
   aspect-ratio: 1.7/1;
 }
 
@@ -110,5 +110,17 @@ export default {
     letter-spacing: 1px;
     font-size: 14px;
   }
+}
+
+
+@media screen and (min-width: 1800px) {
+  .vault-coverImg {
+    background-image: v-bind(vaultCoverImg);
+    background-size: cover;
+    background-position: center;
+    height: 20dvh;
+    aspect-ratio: 1.7/1;
+  }
+
 }
 </style>

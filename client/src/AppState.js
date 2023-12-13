@@ -20,8 +20,6 @@ export const AppState = reactive({
   /** @type {import('./models/Vault.js').Vault | null} */
   activeVault: null,
   /** @type {import('./models/Vault.js').Vault[] */
-  activeVaultArray: [],
-  /** @type {import('./models/Keep.js').Keep[]} */
   vaultKeeps: [],
   /** @type Boolean */
   wantsToDeleteKeeps: false,

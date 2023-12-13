@@ -27,22 +27,13 @@ class ProfilesService {
   }
 
   async getActiveProfileKeeps(profileId) {
-    try {
-      const res = await api.get(`api/profiles/${profileId}/keeps`)
-      AppState.profileKeeps = res.data.map((pojo) => new Keep(pojo))
-    } catch {
-      logger.log("Could not get Keeps for this Profile.")
-    }
+    const res = await api.get(`api/profiles/${profileId}/keeps`)
+    AppState.profileKeeps = res.data.map((pojo) => new Keep(pojo))
   }
-  //TODO: ask if putting trycatches is OK like this in service and what else do to on the catch
 
   async getActiveProfileVaults(profileId) {
-    try {
-      const res = await api.get(`api/profiles/${profileId}/vaults`)
-      AppState.profileVaults = res.data.map((pojo) => new Vault(pojo))
-    } catch {
-      logger.log("Could not get Vaults for this Profile.")
-    }
+    const res = await api.get(`api/profiles/${profileId}/vaults`)
+    AppState.profileVaults = res.data.map((pojo) => new Vault(pojo))
   }
 
 }

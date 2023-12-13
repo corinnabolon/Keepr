@@ -1,19 +1,19 @@
 <template>
   <div v-if="activeVault" class="container bg-theme-beige text-theme-charcoal mb-4">
     <section class="row justify-content-center">
-      <div v-for="vault in activeVaultArray" :key="vault.id" class="col-12 col-md-6">
-        <VaultCoverComponent :vaultProp="vault" />
+      <div class="col-12 col-md-6 col-lg-8">
+        <VaultCoverComponent :vaultProp="activeVault" />
       </div>
     </section>
     <section class="row justify-content-center">
       <div v-if="account.id && account.id == activeVault.creatorId" class="col-2 invisible-on-mobile"></div>
-      <div class="col-7 col-md-3 text-description fs-4 text-center d-flex flex-column align-items-center mt-3">
+      <div class="col-7 col-md-3 col-lg-5 text-description fs-4 text-center d-flex flex-column align-items-center mt-3">
         <p title="Vault description">{{ activeVault.description }}</p>
         <p class="text-dracula-orchid bg-theme-violet font-menu rounded mx-3 w-50" title="Number of keeps in this vault">
           {{ vaultKeeps.length }} {{
             keepPluralOrSingular }}</p>
       </div>
-      <div v-if="account.id && account.id == activeVault.creatorId" class="col-1 col-md-2">
+      <div v-if="account.id && account.id == activeVault.creatorId" class="col-1 col-md-2 col-lg-1">
         <p class="fs-4 mt-1 ms-5 text-center" :class="[wantsToEditVault ? 'hidden' : '']" @click="flipWantsToEditVault"
           role="button"><i class="mdi mdi-dots-horizontal text-end" title="Edit Vault Information"></i></p>
         <button @click="cancelEdits" class="btn btn-theme-pink mt-2 py-0 cancel-button invisible-on-mobile"
@@ -85,7 +85,6 @@ export default {
       wantsToEditVault: computed(() => AppState.wantsToEditVault),
       activeKeep: computed(() => AppState.activeKeep),
       activeVault: computed(() => AppState.activeVault),
-      activeVaultArray: computed(() => AppState.activeVaultArray),
       keepPluralOrSingular: computed(() => {
         if (AppState.vaultKeeps.length == 1) {
           return "Keep"

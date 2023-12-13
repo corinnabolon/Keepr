@@ -1,7 +1,7 @@
 <template>
   <div v-if="account.id" class="container bg-theme-beige text-theme-charcoal font-menu fs-5">
     <section class="row justify-content-center large-margin-bottom">
-      <div class="col-12 col-md-8 mt-5 position-relative">
+      <div class="col-12 col-lg-9 mt-5 position-relative">
         <p class="fs-1 text-center text-theme-dracula-orchid font-menu">Welcome, {{ account.name }}!</p>
         <img v-if="account.coverImg" :src="account.coverImg" alt="Account cover image" title="Your Profile cover image"
           class="account-coverImg rounded">
@@ -268,5 +268,18 @@ input {
   .cancel-button {
     height: 4rem;
   }
+}
+
+
+@media screen and (min-width: 1800px) {
+  .account-coverImg {
+    aspect-ratio: 1.9/1;
+  }
+
+  .account-picture {
+    height: 24dvh;
+    top: 78%;
+  }
+
 }
 </style>

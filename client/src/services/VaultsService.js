@@ -6,12 +6,10 @@ import { KeepInVault } from "../models/KeepInVault.js"
 class VaultsService {
 
   async getVaultById(vaultId) {
-    AppState.activeVaultArray.length = 0
+    AppState.activeVault = null
     const res = await api.get(`api/vaults/${vaultId}`)
     let newVault = new Vault(res.data)
     AppState.activeVault = newVault
-    AppState.activeVaultArray.push(newVault)
-    //TODO: find more efficient way than making this array of a single thing to pass down props so can use the image as a background
   }
 
   async getKeepsInVault(vaultId) {
@@ -34,8 +32,6 @@ class VaultsService {
     const res = await api.put(`api/vaults/${vaultData.id}`, vaultData)
     const updatedVault = new Vault(res.data)
     AppState.activeVault = updatedVault
-    AppState.activeVaultArray.splice(0, 1, updatedVault)
-    //TODO: see the above Todo re: this array
   }
 
   async destroyVault(vaultId) {
@@ -46,7 +42,6 @@ class VaultsService {
 
   clearVaultData() {
     AppState.activeVault = null;
-    AppState.activeVaultArray.length = 0;
     AppState.vaultKeeps.length = 0;
     AppState.myVaults.length = 0;
   }
