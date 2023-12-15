@@ -168,7 +168,7 @@ export default {
   .profile-picture {
     height: 16dvh;
     left: 36%;
-    top: 42%;
+    top: 26%;
   }
 }
 

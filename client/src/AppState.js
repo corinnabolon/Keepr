@@ -27,4 +27,8 @@ export const AppState = reactive({
   wantsToDeleteVaults: false,
   /** @type Boolean */
   wantsToEditVault: false,
+  /** @type Boolean */
+  showMobileLoginMenu: false,
+  /** @type Boolean */
+  mobileShowingLinks: false,
 })

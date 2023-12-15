@@ -4,11 +4,14 @@
   </header>
   <main>
     <router-view />
+    <div class="d-md-none sticky-bottom">
+      <NavbarForMobile />
+    </div>
   </main>
 
-  <header class="d-md-none sticky-bottom">
+  <!-- <header class="d-md-none sticky-bottom">
     <NavbarForMobile />
-  </header>
+  </header> -->
 
   <KeepDetailsModalComponent />
   <CreateKeepModal />
