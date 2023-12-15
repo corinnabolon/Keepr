@@ -5,19 +5,21 @@
   <main>
     <router-view />
   </main>
+
+  <header class="d-md-none sticky-bottom">
+    <NavbarForMobile />
+  </header>
+
   <KeepDetailsModalComponent />
   <CreateKeepModal />
   <CreateVaultModal />
-
-  <header class="d-md-none sticky-bottom">
-    <Navbar />
-  </header>
 </template>
 
 <script>
 import { computed } from 'vue'
 import { AppState } from './AppState'
 import Navbar from './components/Navbar.vue'
+import NavbarForMobile from './components/NavbarForMobile.vue'
 import KeepDetailsModalComponent from "./components/KeepDetailsModalComponent.vue"
 import CreateKeepModal from "./components/CreateKeepModal.vue"
 import CreateVaultModal from "./components/CreateVaultModal.vue"
@@ -28,7 +30,7 @@ export default {
       appState: computed(() => AppState)
     }
   },
-  components: { Navbar, KeepDetailsModalComponent, CreateKeepModal, CreateVaultModal }
+  components: { Navbar, KeepDetailsModalComponent, CreateKeepModal, CreateVaultModal, NavbarForMobile }
 }
 </script>
 <style lang="scss">
