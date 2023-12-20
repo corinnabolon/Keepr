@@ -32,7 +32,7 @@
 
 
 <script>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue';
 import Pop from "../utils/Pop.js";
 import { keepsService } from "../services/KeepsService.js";
 import { Modal } from "bootstrap";
