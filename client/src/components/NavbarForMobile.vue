@@ -10,10 +10,10 @@
       <div class="col-6 mt-2 ms-5 d-flex flex-column justify-content-center">
         <!-- <ul class="navbar-nav">
           <li v-if="account.id" class="font-menu fw-bold fs-4"> -->
-        <div v-if="!showingLinks" @click="flipShowingLinks" role="button">
+        <div v-if="account.id && !showingLinks" @click="flipShowingLinks" role="button">
           <p class="px-3 font-menu fw-bold fs-5 mb-0">Create</p>
         </div>
-        <div v-if="showingLinks">
+        <div v-if="account.id && showingLinks">
           <p @click="flipShowingLinks" class="px-3 menu-theme font-menu fw-bold" data-bs-toggle="modal"
             data-bs-target="#createKeepModal">new
             keep
