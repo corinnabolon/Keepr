@@ -5,8 +5,14 @@
         <div class="container">
           <section v-if="activeKeep" class="row">
             <div class="col-12 col-md-6 mx-0 px-0 position-relative">
-              <button type="button" class="bg-danger btn-close mb-0 invisible-on-desktop close-position"
-                data-bs-dismiss="modal" aria-label="Close" title="Close Keep display"></button>
+              <section class="row justify-content-end">
+                <div class="col-2">
+                  <button type="button" class="bg-danger btn-close mb-0 fs-4 invisible-on-desktop close-position"
+                    data-bs-dismiss="modal" aria-label="Close" title="Close Keep display"></button>
+                </div>
+              </section>
+              <!-- <button type="button" class="bg-danger btn-close mb-0 invisible-on-desktop close-position"
+                data-bs-dismiss="modal" aria-label="Close" title="Close Keep display"></button> -->
               <img :src="activeKeep.img" alt="Keep picture" :title="activeKeep.name"
                 class="keep-image rounded-start m-0 p-0">
             </div>
@@ -202,7 +208,7 @@ export default {
 
 .close-position {
   position: absolute;
-  bottom: 95%;
-  right: 3%;
+  bottom: 93%;
+  right: 4%;
 }
 </style>
