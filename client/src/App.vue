@@ -8,11 +8,6 @@
       <NavbarForMobile />
     </div>
   </main>
-
-  <!-- <header class="d-md-none sticky-bottom">
-    <NavbarForMobile />
-  </header> -->
-
   <KeepDetailsModalComponent />
   <CreateKeepModal />
   <CreateVaultModal />
