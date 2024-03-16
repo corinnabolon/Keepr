@@ -4,7 +4,7 @@
       @click="goVaultPage(vaultProp.id)" role="button" :title='`Go to Vault page of "${vaultProp.name}"`'>
       <p v-if="wantsToDeleteVaults" @click.stop="destroyVault(vaultProp.id)"
         class="fs-4 text-danger align-self-end delete-icon">
-        <i class="mdi mdi-close-circle" title="Delete this Vault"></i>
+        <i class="mdi mdi-close-circle" title="Delete this vault"></i>
       </p>
       <div class="d-flex align-items-end justify-content-between my-1">
         <p class="text-theme-white title-label font-vault vault-title fw-bold ms-1 mb-1 px-2">{{
