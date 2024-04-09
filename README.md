@@ -29,37 +29,37 @@ Through the development of Keepr, I deepened my understanding of C# and honed my
 
 ## Installing Dependencies / Build:
 
-<b>Client</b>
+<b>Client</b><br>
 Node.js is required to run the project. If you haven't installed Node.js yet, you can download it from <a href="https://nodejs.org/en">the official Node.js website</a>.
 
--Navigate to the client directory.
--Run <b>npm install</b> to install dependencies for the client side.
--Run <b>npm run build</b> to build the client-side application.
+-Navigate to the client directory.<br>
+-Run <b>npm install</b> to install dependencies for the client side.<br>
+-Run <b>npm run build</b> to build the client-side application.<br>
 
-<b>Server</b>
+<b>Server</b><br>
 The .NET SDK is required to build and run the server-side project. You can download and install it from <a href="https://dotnet.microsoft.com/en-us/download">the official .NET website</a>.
 
--Navigate to the server directory.
--Run <b>dotnet restore</b> to install dependencies for the server side.
+-Navigate to the server directory.<br>
+-Run <b>dotnet restore</b> to install dependencies for the server side.<br>
 
 ## Docker Deployment:
 
 <b>Installing Docker</b>
 
-Windows:
+Windows:<br>
 Download the Docker Desktop installer from the official Docker website and follow the installation instructions.
-Once installed, Docker Desktop should be running, and you can access it from the system tray.
-macOS:
+Once installed, Docker Desktop should be running, and you can access it from the system tray.<br>
+macOS:<br>
 Download the Docker Desktop installer from the official Docker website and follow the installation instructions.
-Once installed, Docker Desktop should be running, and you can access it from the menu bar.
-Linux:
-Follow the installation instructions for Docker on your specific Linux distribution. You can find installation instructions on the Docker documentation website.
+Once installed, Docker Desktop should be running, and you can access it from the menu bar.<br>
+Linux:<br>
+Follow the installation instructions for Docker on your specific Linux distribution. You can find installation instructions on the Docker documentation website.<br>
 
 After installing Docker, ensure it's running and accessible from the command line by running <b>docker --version</b>.
 
-<b>Building and Running Docker Container</b>
--Navigate to the root directory of your project.
--Run <b>docker build -t your-image-name</b> to build the Docker image. (Replace your-image-name with the desired name for your Docker image.)
+<b>Building and Running Docker Container</b><br>
+-Navigate to the root directory of your project.<br>
+-Run <b>docker build -t your-image-name</b> to build the Docker image. (Replace your-image-name with the desired name for your Docker image.)<br>
 -Once the image is built, you can run your container using <b>docker run -p 8080:7045 your-image-name</b>.
 
 Navigate to http://localhost:8080/ to see the running app!
