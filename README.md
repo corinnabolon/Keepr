@@ -46,14 +46,10 @@ The .NET SDK is required to build and run the server-side project. You can downl
 
 <b>Installing Docker</b>
 
-Windows:<br>
-Download the Docker Desktop installer from the official Docker website and follow the installation instructions.
-Once installed, Docker Desktop should be running, and you can access it from the system tray.<br>
-macOS:<br>
-Download the Docker Desktop installer from the official Docker website and follow the installation instructions.
-Once installed, Docker Desktop should be running, and you can access it from the menu bar.<br>
+Windows / macOS:<br>
+Download the Docker Desktop installer from <a href="https://www.docker.com/">the official Docker website</a> and follow the installation instructions.<br>
 Linux:<br>
-Follow the installation instructions for Docker on your specific Linux distribution. You can find installation instructions on the Docker documentation website.<br>
+Follow the installation instructions for Docker on your specific Linux distribution. You can find installation instructions on <a href="https://docs.docker.com/desktop/install/linux-install/">the Docker documentation website</a>.<br>
 
 After installing Docker, ensure it's running and accessible from the command line by running <b>docker --version</b>.
 
