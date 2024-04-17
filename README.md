@@ -26,3 +26,36 @@ User Profiles: Every user has a public profile page, showcasing their Keeps and 
 
 ## What I learned from this project:
 Through the development of Keepr, I deepened my understanding of C# and honed my skills in working with the .NET Framework. Specifically, implementing and optimizing the handling of data relationships was a significant learning point, as well as devising an efficient system for managing view and kept counts on the back end using C#. I continued to hone my front-end skills with Vue.js, and am particularly proud of the masonry layout of the pictures. I also tackled the challenge of hosting a MySQL database on AWS, touching on the intricacies of database management and connectivity within the application.
+
+## Installing Dependencies / Build:
+
+<b>Client</b><br>
+Node.js is required to run the project. If you haven't installed Node.js yet, you can download it from <a href="https://nodejs.org/en">the official Node.js website</a>.
+
+-Navigate to the client directory.<br>
+-Run <b>npm install</b> to install dependencies for the client side.<br>
+-Run <b>npm run build</b> to build the client-side application.<br>
+
+<b>Server</b><br>
+The .NET SDK is required to build and run the server-side project. You can download and install it from <a href="https://dotnet.microsoft.com/en-us/download">the official .NET website</a>.
+
+-Navigate to the server directory.<br>
+-Run <b>dotnet restore</b> to install dependencies for the server side.<br>
+
+## Docker Deployment:
+
+<b>Installing Docker</b>
+
+Windows / macOS:<br>
+Download the Docker Desktop installer from <a href="https://www.docker.com/">the official Docker website</a> and follow the installation instructions.<br>
+Linux:<br>
+Follow the installation instructions for Docker on your specific Linux distribution. You can find installation instructions on <a href="https://docs.docker.com/desktop/install/linux-install/">the Docker documentation website</a>.<br>
+
+After installing Docker, ensure it's running and accessible from the command line by running <b>docker --version</b>.
+
+<b>Building and Running Docker Container</b><br>
+-Navigate to the root directory of your project.<br>
+-Run <b>docker build -t your-image-name</b> to build the Docker image. (Replace your-image-name with the desired name for your Docker image.)<br>
+-Once the image is built, you can run your container using <b>docker run -p 8080:7045 your-image-name</b>.
+
+Navigate to http://localhost:8080/ to see the running app!
