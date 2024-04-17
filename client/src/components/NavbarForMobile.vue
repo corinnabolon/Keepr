@@ -8,8 +8,6 @@
         </router-link>
       </div>
       <div class="col-6 mt-2 ms-5 d-flex flex-column justify-content-center">
-        <!-- <ul class="navbar-nav">
-          <li v-if="account.id" class="font-menu fw-bold fs-4"> -->
         <div v-if="account.id && !showingLinks" @click="flipShowingLinks" role="button">
           <p class="px-3 font-menu fw-bold fs-5 mb-0">Create</p>
         </div>
